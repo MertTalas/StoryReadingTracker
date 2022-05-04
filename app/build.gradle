@@ -28,7 +28,7 @@ android {
 }
 
 def retrofitVersion = '2.9.0'
-def rxJavaVersion = '3.0.0'
+def rxJavaVersion = '2.1.1'
 
 dependencies {
 

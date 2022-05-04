@@ -1,4 +1,4 @@
-package com.imposterstech.storyreadingtracker;
+package com.imposterstech.storyreadingtracker.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.imposterstech.storyreadingtracker.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
