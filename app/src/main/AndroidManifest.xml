@@ -11,6 +11,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.StoryReadingActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.MainPageActivity"
             android:exported="false" />
         <activity

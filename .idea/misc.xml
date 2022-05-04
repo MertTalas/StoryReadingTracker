@@ -3,8 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.3145" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_main_past_readings_option.xml" value="0.3545" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_main_profile_option.xml" value="0.3545" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_main_ranking_option.xml" value="0.3545" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_main_read_story_option.xml" value="0.3545" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_main_settings_option.xml" value="0.3545" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_camera.xml" value="0.3675" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_exit.xml" value="0.325" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_restart.xml" value="0.3675" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_skip.xml" value="0.325" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_main_page.xml" value="0.33" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_story_reading.xml" value="0.259375" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/rv_main_option_row.xml" value="0.5" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/toolbar_reading_story.xml" value="0.436241610738255" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.28802083333333334" />
