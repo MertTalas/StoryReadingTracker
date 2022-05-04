@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
-import com.imposterstech.storyreadingtracker.Model.UserModel;
+import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private String token;
 
     private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
+    private Button buttonLogin,buttonRegister;
 
 
     @Override
@@ -59,14 +59,21 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent to_register_intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(to_register_intent);
+                //finish();
+            }
+        });
 
-
-        //getUserData();
     }
     public void init(){
         editTextEmail = findViewById(R.id.editText_loginpage_email);
         editTextPassword = findViewById(R.id.editText_loginpage_password);
         buttonLogin = findViewById(R.id.button_loginpage_login);
+        buttonRegister=findViewById(R.id.button_loginpage_register);
     }
 
     private void login(){
@@ -98,50 +105,27 @@ public class LoginActivity extends AppCompatActivity {
                     Headers headers = response.headers();
                     String authorization = response.headers().get("Authorization");
                     token=authorization;
-                    Log.e("token",token);
-                    Toast.makeText(getApplicationContext(),token,Toast.LENGTH_LONG).show();
-                   /* Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
+                    //Log.e("token",token);
+                    Toast.makeText(getApplicationContext(),"Successful login!!",Toast.LENGTH_LONG).show();
+                    Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
                     to_main_intent.putExtra("token",token);
                     //getIntent().getStringExtra("token") diğer tarafta
                     startActivity(to_main_intent);
-                    finish();*/
-
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Failed login.",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Failed login.",Toast.LENGTH_LONG).show();
-                Log.e("fail","failyaw");
+                //Log.e("fail","failyaw");
             }
         });
 
 
     }
 
-    private void getUserData(){
-        UserAPI userAPI=retrofit.create(UserAPI.class);
-
-        Call<UserModel> call= userAPI.getUser("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmb3J0ZXN0MkB0ZXN0LmNvbSIsImV4cCI6MTY1MjQ3OTM0Nn0.Hm9HzQuEZZakFHdbHkgBn08wBB_lZqi7uGAtU2d4pfBiEpOyUkHgmj7Gd6r72ymknRC1SzlNCkM68WqLCGJIqw");
-
-        //async
-        call.enqueue(new Callback<UserModel>() {
-            @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                if(response.isSuccessful()){
-                    user=response.body();
-                    System.out.println(user.getFirstName());
-                    System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
-
-                System.out.println("bbbbbbbbbb");
-                t.printStackTrace();
-            }
-        });
-
-    }
 }

@@ -1,7 +1,8 @@
 package com.imposterstech.storyreadingtracker.service;
 
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
-import com.imposterstech.storyreadingtracker.Model.UserModel;
+import com.imposterstech.storyreadingtracker.Model.Request.RegisterRequestModel;
+import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -17,4 +18,8 @@ public interface UserAPI {
 
     @POST("users/login")
     Call<ResponseBody> login(@Body LoginRequestModel loginRequestModel);
+
+    @POST("users")
+    Call<UserModel> register(@Body RegisterRequestModel registerRequestModel);
+
 }
