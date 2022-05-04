@@ -1,4 +1,4 @@
-package com.imposterstech.storyreadingtracker.Model;
+package com.imposterstech.storyreadingtracker.Model.Response;
 
 import com.google.gson.annotations.SerializedName;
 
