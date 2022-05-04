@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
+import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
@@ -108,7 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                     //Log.e("token",token);
                     Toast.makeText(getApplicationContext(),"Successful login!!",Toast.LENGTH_LONG).show();
                     Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
-                    to_main_intent.putExtra("token",token);
+                    //to_main_intent.putExtra("token",token);
+
+                    //We will manage logged user as singleton instance
+                    SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+                    currentUser.setToken(token);
+
+
+
                     //getIntent().getStringExtra("token") diğer tarafta
                     startActivity(to_main_intent);
                     finish();
