@@ -13,8 +13,8 @@ import retrofit2.http.POST;
 
 public interface UserAPI {
 
-    @GET("users/iremercin@test.com")
-    Call<UserModel> getUser(@Header("Authorization") String authorization);
+  /*  @GET("users/iremercin@test.com")
+    Call<UserModel> getUser(@Header("Authorization") String authorization);*/
 
     @POST("users/login")
     Call<ResponseBody> login(@Body LoginRequestModel loginRequestModel);

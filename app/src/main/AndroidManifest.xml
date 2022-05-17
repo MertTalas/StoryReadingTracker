@@ -3,6 +3,11 @@
     package="com.imposterstech.storyreadingtracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Declare features -->
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- Declare permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
