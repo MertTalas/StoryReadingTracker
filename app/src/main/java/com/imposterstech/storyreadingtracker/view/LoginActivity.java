@@ -30,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
-    private String BASE_URL="http://10.0.2.2:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
 
@@ -78,6 +78,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(){
+        //Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
+        //to_main_intent.putExtra("token",token);
+
+        //We will manage logged user as singleton instance
+       // SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+       // currentUser.setToken(token);
+        //startActivity(to_main_intent);
+       // finish();
+        //şimdilik
+
         UserAPI userAPI=retrofit.create(UserAPI.class);
 
         String email = editTextEmail.getText().toString();

@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     ArrayAdapter ageArrayAdapter;
     ArrayAdapter genderArrayAdapter;
 
-    private String BASE_URL="http://10.0.2.2:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
 
     @Override
