@@ -22,6 +22,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -49,6 +50,12 @@ import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.FaceExperienceAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -68,7 +75,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.40:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
     private StoryModel storyModel;
@@ -324,7 +331,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         detector = FaceDetection.getClient(realTimeOpts);
 
 
-
+        setTextSize();
         buttonStartReading.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -387,6 +394,18 @@ public class StoryReadingActivity extends AppCompatActivity {
         });
 
 
+    }
+    private void setTextSize(){
+        try {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
+            String line = in.readLine();
+            textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));;
+            in.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private boolean hasCameraPermission() {
         return ContextCompat.checkSelfPermission(
