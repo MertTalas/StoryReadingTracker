@@ -16,6 +16,7 @@ import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.MainPageActivity;
+import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
 import java.util.ArrayList;
@@ -46,6 +47,11 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
 
                 if(options.get(position).getName().equals("Read Story")){
                     Intent to_readstory_intent=new Intent(holder.itemView.getContext(), StoryReadingActivity.class);
+                    holder.itemView.getContext().startActivity(to_readstory_intent);
+
+                }
+                if(options.get(position).getName().equals("Settings")){
+                    Intent to_readstory_intent=new Intent(holder.itemView.getContext(), SettingsActivity.class);
                     holder.itemView.getContext().startActivity(to_readstory_intent);
 
                 }
