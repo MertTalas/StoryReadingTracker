@@ -4,6 +4,8 @@ import com.imposterstech.storyreadingtracker.Model.Contour;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.FaceExperienceModel;
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,5 +21,8 @@ public interface FaceExperienceAPI {
 
     @PUT("faceExperiences/{faceExperienceId}")
     Call<Void> addContour(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId,@Body Contour contour);
+
+    @PUT("faceExperiences/{faceExperienceId}/all")
+    Call<Void> addAllContour(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId,@Body List<Contour> contourList);
 
 }
