@@ -26,10 +26,23 @@
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/layout/activity_login.xml" value="0.271875" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/layout/activity_splash_screen.xml" value="0.264" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.28802083333333334" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_main_read_story_option.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_main_settings_option.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_settings_about.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_settings_change_language.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_settings_font_size.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_settings_give_feedback.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/drawable/ic_settings_logout.xml" value="0.1445" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/activity_main_page.xml" value="0.22826086956521738" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/activity_settings.xml" value="0.29683698296836986" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/activity_story_reading.xml" value="0.36666666666666664" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/av_set_font_size.xml" value="0.264" />
+        <entry key="..\:/androidProjectTez/app/src/main/res/layout/rv_main_option_row.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
