@@ -1,8 +1,13 @@
 package com.imposterstech.storyreadingtracker.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     Retrofit retrofit;
     private String token;
 
+    private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
+    private static final int CAMERA_REQUEST_CODE = 10;
+
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin,buttonRegister;
 
@@ -45,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
+        checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
 
         //Retrofit & JSON
 
@@ -75,7 +84,57 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editText_loginpage_password);
         buttonLogin = findViewById(R.id.button_loginpage_login);
         buttonRegister=findViewById(R.id.button_loginpage_register);
+
     }
+
+
+    // Function to check and request permission.
+    public void checkPermission(String permission, int requestCode)
+    {
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+
+            // Requesting the permission
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[] { permission }, requestCode);
+        }
+        else {
+            Toast.makeText(LoginActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // This function is called when the user accepts or decline the permission.
+    // Request Code is used to check which permission called this function.
+    // This request code is provided when the user is prompt for permission.
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode,
+                permissions,
+                grantResults);
+
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(LoginActivity.this, "Camera Permission Granted", Toast.LENGTH_SHORT) .show();
+            }
+            else {
+                Toast.makeText(LoginActivity.this, "Camera Permission Denied", Toast.LENGTH_SHORT) .show();
+            }
+        }
+       /* else if (requestCode == STORAGE_PERMISSION_CODE) {     //later for microphone perm  //TODO
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Storage Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }*/
+    }
+
+
+
+
 
     private void login(){
         //Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);

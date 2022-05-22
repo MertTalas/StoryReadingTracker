@@ -22,6 +22,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -41,13 +42,16 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.imposterstech.storyreadingtracker.Model.Contour;
+import com.imposterstech.storyreadingtracker.Model.Request.ReadingExperienceRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.FaceExperienceModel;
 import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
+import com.imposterstech.storyreadingtracker.Model.Response.StoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.FaceExperienceAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
+import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +80,9 @@ public class StoryReadingActivity extends AppCompatActivity {
     FaceExperienceAPI faceExperienceAPI;
     SingletonCurrentUser currentUser;
     FaceExperienceModel faceExperienceModel;
+    
+    private int failAttemp;
+    private int successfullAttemp;
 
 
     private TextView textViewTitle,textViewStoryText;
@@ -88,6 +95,8 @@ public class StoryReadingActivity extends AppCompatActivity {
     FaceDetectorOptions realTimeOpts;
     FaceDetector detector;
 
+    private boolean isStarted;
+
     List<Contour> contourList;
     long i=1;
     long timeMilsec=50;
@@ -98,7 +107,18 @@ public class StoryReadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_story_reading);
+
+
+
         init();
+     /*   if (hasCameraPermission()) {  //MANAGED AT LOGIN
+
+        } else {
+            requestPermission();
+            enableCamera();
+        }*/
+
+
         //Retrofit & JSON
 
         Gson gson=new GsonBuilder().setLenient().create();
@@ -123,6 +143,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
         imageCapture =
                 new ImageCapture.Builder()
+                        .setTargetResolution(new Size(120,60))
 //                        .setTargetRotation(previewView.getDisplay().getRotation())
                         .build();
 
@@ -159,14 +180,16 @@ public class StoryReadingActivity extends AppCompatActivity {
                         super.onCaptureSuccess(image);
                         detectFaces(InputImage.fromMediaImage(image.getImage(),0),i);
                         image.close();
-                        Toast.makeText(getApplicationContext(),"image captured.",Toast.LENGTH_LONG).show();
+
+                       // Toast.makeText(getApplicationContext(),"image captured.",Toast.LENGTH_LONG).show();
 
                     }
 
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
                         super.onError(exception);
-                        Toast.makeText(getApplicationContext(),"image couldn't captured.",Toast.LENGTH_LONG).show();
+
+                       // Toast.makeText(getApplicationContext(),"image couldn't captured.",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -184,6 +207,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                                 new OnSuccessListener<List<Face>>() {
                                     @Override
                                     public void onSuccess(List<Face> faces) {
+                                        successfullAttemp++;
                                         // Task completed successfully
                                         // [START_EXCLUDE]
                                         // [START get_face_info]
@@ -207,7 +231,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
                                             // If contour detection was enabled:
-
+                                            /*
                                             Contour contour =new Contour();
                                             List<PointF> faceOvalContour=
                                                     face.getContour(FaceContour.FACE).getPoints();
@@ -259,14 +283,38 @@ public class StoryReadingActivity extends AppCompatActivity {
                                             contour.setRotY(rotY);
                                             contour.setRotZ(rotZ);
                                             contour.setReadingMilisecond(readingMiliSec);
+                                            */
+
+
+                                                Contour contour =new Contour();
+                                                contour.setFaceOvalContour(face.getContour(FaceContour.FACE).getPoints());
+                                                contour.setUpperLipBottomContour(face.getContour(FaceContour.UPPER_LIP_BOTTOM).getPoints());
+                                                contour.setLeftEyeContour(face.getContour(FaceContour.LEFT_EYE).getPoints());
+                                                contour.setLeftCheekContour(face.getContour(FaceContour.LEFT_CHEEK).getPoints());
+                                                contour.setLeftEyebrowBotContour(face.getContour(FaceContour.LEFT_EYEBROW_BOTTOM).getPoints());
+                                                contour.setRightEyeContour(face.getContour(FaceContour.RIGHT_EYE).getPoints());
+                                                contour.setLeftEyebrowTopContour(face.getContour(FaceContour.LEFT_EYEBROW_TOP).getPoints());
+                                                contour.setLowerLipBotContour(face.getContour(FaceContour.LOWER_LIP_BOTTOM).getPoints());
+                                                contour.setLowerLipTopContour(face.getContour(FaceContour.LOWER_LIP_TOP).getPoints());
+                                                contour.setNoseBotContour( face.getContour(FaceContour.NOSE_BOTTOM).getPoints());
+                                                contour.setNoseBridgeContour( face.getContour(FaceContour.NOSE_BRIDGE).getPoints());
+                                                contour.setUpperLipTopContour(face.getContour(FaceContour.UPPER_LIP_TOP).getPoints());
+                                                contour.setRightCeekContour(face.getContour(FaceContour.RIGHT_CHEEK).getPoints());
+                                                contour.setRightEyebrowBotContour(face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM).getPoints());
+                                                contour.setRightEyebrowTopContour(face.getContour(FaceContour.RIGHT_EYEBROW_TOP).getPoints());
+                                                contour.setRotY(rotY);
+                                                contour.setRotZ(rotZ);
+                                                contour.setReadingMilisecond(readingMiliSec);
+                                                contourList.add(contour);
 
 
 
+/*
                                             Call<Void> call=faceExperienceAPI.addContour(currentUser.getToken(),faceExperienceModel.getFaceExperienceDocumentId(),contour);
                                             call.enqueue(new Callback<Void>() {
                                                 @Override
                                                 public void onResponse(Call<Void> call, Response<Void> response) {
-                                                    contourList.add(contour);
+                                                   // contourList.add(contour);
                                                 }
 
                                                 @Override
@@ -274,7 +322,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                                                     Log.e("facepoint","fail kayıt ");
                                                 }
                                             });
-
+*/
 
 
 
@@ -294,8 +342,8 @@ public class StoryReadingActivity extends AppCompatActivity {
                                 new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        // Task failed with an exception
-                                        // ...
+                                        Toast.makeText(getApplicationContext(),"THERE IS NO FACE ON SCREEN.",Toast.LENGTH_LONG).show();
+                                        failAttemp++;
                                     }
                                 });
 
@@ -305,6 +353,8 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     public void init(){
+        isStarted=false;//to store started or not
+
         textViewStoryText=findViewById(R.id.textView_story_reading_page_story_text);
         textViewTitle=findViewById(R.id.textView_story_reading_page_title);
         imageButtonRestart=findViewById(R.id.ImageButton_toolbar_restart);
@@ -329,6 +379,25 @@ public class StoryReadingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Timer timer = new Timer();
+
+
+
+                if(isStarted){
+                    isStarted=false;
+                    timer.cancel();
+                    finishReading();
+
+
+
+                }
+                else
+                {
+                    failAttemp=0;
+                    successfullAttemp=0;
+                    isStarted=true;
+
+
 
                 currentUser=SingletonCurrentUser.getInstance();
 
@@ -342,7 +411,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                     public void onResponse(Call<FaceExperienceModel> call, Response<FaceExperienceModel> response) {
                         faceExperienceModel= response.body();
 
-                        Timer timer = new Timer();
+
                         timer.schedule(new TimerTask()
                         {
                             @Override
@@ -351,7 +420,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
                                 //takes pictureevery 0,1 second
                                 onTakePicture(i);
-                                i=i=timeMilsec;
+                                i=i+timeMilsec;
                             }
                         }, 0, timeMilsec);
 
@@ -369,12 +438,8 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
 
-                /*
-                if (hasCameraPermission()) {
-                    enableCamera();
-                } else {
-                    requestPermission();
-                }*/
+                }
+
             }
         });
 
@@ -388,6 +453,61 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     }
+
+    private void finishReading(){
+        SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+        // TODO READ COMMENTS BELOW
+
+        StoryUserAPI storyUserAPI=retrofit.create(StoryUserAPI.class);
+        faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
+        ReadingExperienceRequestModel readingExperienceRequestModel=new ReadingExperienceRequestModel();
+        readingExperienceRequestModel.setFeedbackRate(1); //will be updated with pop up
+        readingExperienceRequestModel.setGainedPoint(1);//every story is 1 point
+        readingExperienceRequestModel.setFaceExperienceDocumentId(faceExperienceModel.getFaceExperienceDocumentId());
+        int totalAttemp=successfullAttemp+failAttemp;
+        int succesRate=successfullAttemp/totalAttemp;
+        succesRate=succesRate*100;
+        readingExperienceRequestModel.setSuccessRate(succesRate); // will be updated via mic and camera
+
+
+        Call<StoryUserModel> call=storyUserAPI.createReadingExperience(readingExperienceRequestModel, storyModel.getStoryId(), currentUser.getToken());
+
+        call.enqueue(new Callback<StoryUserModel>() {
+            @Override
+            public void onResponse(Call<StoryUserModel> call, Response<StoryUserModel> response) {
+                if(response.isSuccessful()){
+
+                    Toast.makeText(getApplicationContext(),"Reading experience saved.",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoryUserModel> call, Throwable t) {
+
+            }
+        });
+
+
+        Call<Void> callFaceExperience=faceExperienceAPI.addAllContour(currentUser.getToken(),faceExperienceModel.getFaceExperienceDocumentId(),contourList);
+
+        callFaceExperience.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(getApplicationContext(),"Face experience saved.",Toast.LENGTH_LONG).show();
+                contourList=null;
+                contourList=new ArrayList<>();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+
     private boolean hasCameraPermission() {
         return ContextCompat.checkSelfPermission(
                 this,

@@ -42,13 +42,14 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),options.get(position).getName(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(view.getContext(),options.get(position).getName(),Toast.LENGTH_LONG).show();
 
                 if(options.get(position).getName().equals("Read Story")){
                     Intent to_readstory_intent=new Intent(holder.itemView.getContext(), StoryReadingActivity.class);
                     holder.itemView.getContext().startActivity(to_readstory_intent);
 
                 }
+
 
 
                /* Toast.makeText(getApplicationContext(),"Successful login!!",Toast.LENGTH_LONG).show();
