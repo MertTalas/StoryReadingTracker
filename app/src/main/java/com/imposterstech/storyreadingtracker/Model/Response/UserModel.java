@@ -77,7 +77,7 @@ public class UserModel {
         this.points = points;
     }
 
-    public boolean isTermsAndPoliciesAccepted() {
+    public boolean getTermsAndPoliciesAccepted() {
         return termsAndPoliciesAccepted;
     }
 

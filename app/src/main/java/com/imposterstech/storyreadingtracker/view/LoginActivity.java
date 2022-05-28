@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.40:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
 
@@ -174,6 +174,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Headers headers = response.headers();
                     String authorization = response.headers().get("Authorization");
+
+
+
+
+
                     token=authorization;
                     //Log.e("token",token);
                     Toast.makeText(getApplicationContext(),"Successful login!!",Toast.LENGTH_LONG).show();
