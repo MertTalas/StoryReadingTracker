@@ -22,4 +22,7 @@ public interface UserAPI {
     @POST("users")
     Call<UserModel> register(@Body RegisterRequestModel registerRequestModel);
 
+    @GET("users/currentUser")
+    Call<UserModel> getCurrentUser(@Header("Authorization") String authorization);
+
 }

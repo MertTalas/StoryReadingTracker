@@ -25,4 +25,11 @@ public interface FaceExperienceAPI {
     @PUT("faceExperiences/{faceExperienceId}/all")
     Call<Void> addAllContour(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId,@Body List<Contour> contourList);
 
+
+
+
+
+
+
+
 }
