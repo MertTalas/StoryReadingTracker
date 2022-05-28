@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,10 +20,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
+import com.imposterstech.storyreadingtracker.Model.Response.RoleModel;
+import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.service.RoleAPI;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
@@ -132,6 +139,55 @@ public class LoginActivity extends AppCompatActivity {
         }*/
     }
 
+    private void createIntent(){
+
+        RoleAPI roleAPI=retrofit.create(RoleAPI.class);
+        SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+        Call<List<RoleModel>> call=roleAPI.getRolesOfCurrentUser(currentUser.getToken());
+
+
+        call.enqueue(new Callback<List<RoleModel>>() {
+            @Override
+            public void onResponse(Call<List<RoleModel>> call, Response<List<RoleModel>> response) {
+                if(response.isSuccessful()){
+                    List<RoleModel> tempList=response.body();
+                    ArrayList<RoleModel> roleModels=new ArrayList(tempList);
+                    boolean adminFlag=false;
+                    for( RoleModel roleModel:roleModels){
+                        if(roleModel.getName().equals("ROLE_ADMIN")){
+                            adminFlag=true;
+                            break;
+                        }
+                    }
+
+                    if(adminFlag){
+                        Intent to_admin_main_intent = new Intent(LoginActivity.this, AdminMainPageActivity.class);
+
+                        startActivity(to_admin_main_intent);
+                        finish();
+                    }
+                    else{
+                        Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
+
+                        startActivity(to_main_intent);
+                        finish();
+                    }
+
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RoleModel>> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+    }
 
 
 
@@ -182,18 +238,16 @@ public class LoginActivity extends AppCompatActivity {
                     token=authorization;
                     //Log.e("token",token);
                     Toast.makeText(getApplicationContext(),"Successful login!!",Toast.LENGTH_LONG).show();
-                    Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
                     //to_main_intent.putExtra("token",token);
 
                     //We will manage logged user as singleton instance
                     SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
                     currentUser.setToken(token);
 
-
+                    createIntent();
 
                     //getIntent().getStringExtra("token") diğer tarafta
-                    startActivity(to_main_intent);
-                    finish();
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Failed login.",Toast.LENGTH_LONG).show();

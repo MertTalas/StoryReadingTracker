@@ -51,7 +51,7 @@ public class MainPageActivity extends AppCompatActivity {
     public void setCurrentUser(){
 
         SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
-        Call<UserModel> currentUserCall= userAPI.getCurrentUser("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmb3J0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNjU0NjA1NjE4fQ.OPuSSVQmiZOjZDSHHFtYEbnuuJpC5rOUEkOLK64O9QFlb1WnVq6NRTg3XgQAdTx4_MM9YYIvr7MwJ-N2iX75CQ");
+        Call<UserModel> currentUserCall= userAPI.getCurrentUser(currentUser.getToken());
         currentUserCall.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
