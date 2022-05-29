@@ -486,6 +486,9 @@ public class StoryReadingActivity extends AppCompatActivity {
      //   int totalAttemp=successfullAttemp+failAttemp;
       //  int succesRate=successfullAttemp/totalAttemp;
     //    succesRate=succesRate*100;
+     //   int succesRate=successfullAttemp/totalAttemp;
+     //   succesRate=succesRate*100;
+
         readingExperienceRequestModel.setSuccessRate(100); // will be updated via mic and camera
 
 
