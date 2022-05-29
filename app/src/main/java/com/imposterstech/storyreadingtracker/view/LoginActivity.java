@@ -42,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
 
@@ -150,6 +150,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<RoleModel>> call, Response<List<RoleModel>> response) {
                 if(response.isSuccessful()){
+
+
                     List<RoleModel> tempList=response.body();
                     ArrayList<RoleModel> roleModels=new ArrayList(tempList);
                     boolean adminFlag=false;
@@ -244,6 +246,9 @@ public class LoginActivity extends AppCompatActivity {
                     SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
                     currentUser.setToken(token);
 
+                    setCurrentUser();
+
+
                     createIntent();
 
                     //getIntent().getStringExtra("token") diğer tarafta
@@ -263,5 +268,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+    public void setCurrentUser(){
+        SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+        UserAPI userAPI=retrofit.create(UserAPI.class);
+        Call<UserModel> currentUserCall= userAPI.getCurrentUser(currentUser.getToken());
+        currentUserCall.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if(response.isSuccessful()){
+                    SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
+                    currentUser.setLoggedUser(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                Log.e("hataaa","noluyoo");
+            }
+        });
+    }
+
 
 }

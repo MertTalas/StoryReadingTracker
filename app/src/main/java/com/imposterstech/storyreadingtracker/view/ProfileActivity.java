@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Button buttonApply;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     UserAPI userAPI;
     SingletonCurrentUser currentUser;
@@ -91,7 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
                 updateUserRequestModel.setAge(Integer.parseInt(editTextBirthday.getText().toString()));
                 updateUserRequestModel.setFirstName(editTextUsername.getText().toString());
                 updateUserRequestModel.setGender(radioButton.getText().toString());
-                updateUserRequestModel.setLastName("Mustafa");
+                updateUserRequestModel.setLastName(currentUser.getLoggedUser().getLastName());
+
 
                 Call<UserModel> call = userAPI.updateUser(currentUser.getToken(),updateUserRequestModel);
                 call.enqueue(new Callback<UserModel>() {
