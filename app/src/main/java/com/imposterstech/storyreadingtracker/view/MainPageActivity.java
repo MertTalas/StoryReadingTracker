@@ -30,8 +30,9 @@ public class MainPageActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewOptions;
     UserAPI userAPI;
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
+    SingletonCurrentUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainPageActivity extends AppCompatActivity {
         token=getIntent().getStringExtra("token");
 
         init();
-        setCurrentUser();
+
         setAdapter();
 
 
@@ -48,26 +49,7 @@ public class MainPageActivity extends AppCompatActivity {
 
 
     }
-    public void setCurrentUser(){
 
-        SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
-        Call<UserModel> currentUserCall= userAPI.getCurrentUser(currentUser.getToken());
-        currentUserCall.enqueue(new Callback<UserModel>() {
-            @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                if(response.isSuccessful()){
-                    SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
-                    currentUser.setLoggedUser(response.body());
-               }
-
-            }
-
-            @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.e("hataaa","noluyoo");
-            }
-        });
-    }
 
     public void init(){
         Gson gson=new GsonBuilder().setLenient().create();
@@ -78,7 +60,7 @@ public class MainPageActivity extends AppCompatActivity {
                 .build();
 
          userAPI=retrofit.create(UserAPI.class);
-
+        currentUser=SingletonCurrentUser.getInstance();
 
 
         recyclerViewOptions=findViewById(R.id.recyclerview_main_page);

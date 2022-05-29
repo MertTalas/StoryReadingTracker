@@ -13,9 +13,18 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.AdminEditStoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.AdminEditStoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.AdminAddStoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ProfileActivity"
-                 android:exported="false" />  
-            <activity      
+            android:exported="false" />
+        <activity
             android:name=".view.AdminMainPageActivity"
             android:exported="false" />
         <activity

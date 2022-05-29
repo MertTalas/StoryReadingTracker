@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AdminMainPageActivity">
+    tools:context=".view.AdminEditStoryActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_admin_main_page"
+        android:id="@+id/recyclerview_admin_editstory_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="1dp"
@@ -19,5 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
