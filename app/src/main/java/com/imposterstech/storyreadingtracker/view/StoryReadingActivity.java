@@ -79,7 +79,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
     private StoryModel storyModel;
@@ -483,10 +483,10 @@ public class StoryReadingActivity extends AppCompatActivity {
         readingExperienceRequestModel.setFeedbackRate(1); //will be updated with pop up
         readingExperienceRequestModel.setGainedPoint(1);//every story is 1 point
         readingExperienceRequestModel.setFaceExperienceDocumentId(faceExperienceModel.getFaceExperienceDocumentId());
-        int totalAttemp=successfullAttemp+failAttemp;
-        int succesRate=successfullAttemp/totalAttemp;
-        succesRate=succesRate*100;
-        readingExperienceRequestModel.setSuccessRate(succesRate); // will be updated via mic and camera
+     //   int totalAttemp=successfullAttemp+failAttemp;
+      //  int succesRate=successfullAttemp/totalAttemp;
+    //    succesRate=succesRate*100;
+        readingExperienceRequestModel.setSuccessRate(100); // will be updated via mic and camera
 
 
         Call<StoryUserModel> call=storyUserAPI.createReadingExperience(readingExperienceRequestModel, storyModel.getStoryId(), currentUser.getToken());

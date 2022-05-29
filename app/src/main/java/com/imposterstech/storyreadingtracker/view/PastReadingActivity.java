@@ -32,7 +32,7 @@ public class PastReadingActivity extends AppCompatActivity {
     ArrayList<SimpleStoryUserModel> pastReadings;
     RecyclerView recyclerViewPastReadings;
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     StoryUserAPI storyUserAPI;
     SingletonCurrentUser currentUser;
@@ -53,6 +53,7 @@ public class PastReadingActivity extends AppCompatActivity {
 
     void init(){
         recyclerViewPastReadings=findViewById(R.id.recyclerview_past_reading_page);
+
         Gson gson=new GsonBuilder().setLenient().create();
         currentUser=SingletonCurrentUser.getInstance();
 

@@ -30,7 +30,7 @@ public class MainPageActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewOptions;
     UserAPI userAPI;
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
 
     @Override
@@ -51,7 +51,7 @@ public class MainPageActivity extends AppCompatActivity {
     public void setCurrentUser(){
 
         SingletonCurrentUser currentUser=SingletonCurrentUser.getInstance();
-        Call<UserModel> currentUserCall= userAPI.getCurrentUser("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmb3J0ZXN0QHRlc3QuY29tIiwiZXhwIjoxNjU0NjA1NjE4fQ.OPuSSVQmiZOjZDSHHFtYEbnuuJpC5rOUEkOLK64O9QFlb1WnVq6NRTg3XgQAdTx4_MM9YYIvr7MwJ-N2iX75CQ");
+        Call<UserModel> currentUserCall= userAPI.getCurrentUser(currentUser.getToken());
         currentUserCall.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
