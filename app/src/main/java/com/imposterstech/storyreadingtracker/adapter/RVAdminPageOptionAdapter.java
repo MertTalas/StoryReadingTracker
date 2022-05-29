@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.view.AdminAddStoryActivity;
+import com.imposterstech.storyreadingtracker.view.AdminEditStoryActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
@@ -51,8 +52,6 @@ public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOp
 
                 }
                 if(options.get(position).equals("Remove Story")){
-                //    Intent to_readstory_intent=new Intent(holder.itemView.getContext(), SettingsActivity.class);
-                //    holder.itemView.getContext().startActivity(to_readstory_intent);
 
                 }
                 if(options.get(position).equals("List Feedbacks")){
@@ -61,8 +60,8 @@ public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOp
 
                 }
                 if(options.get(position).equals("Update Story")){
-                    //  Intent to_readstory_intent=new Intent(holder.itemView.getContext(), PastReadingActivity.class);
-                    //  holder.itemView.getContext().startActivity(to_readstory_intent);
+                    Intent to_editstory_intent=new Intent(holder.itemView.getContext(), AdminEditStoryActivity.class);
+                    holder.itemView.getContext().startActivity(to_editstory_intent);
 
                 }
 
