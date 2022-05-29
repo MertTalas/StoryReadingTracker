@@ -28,4 +28,8 @@ public interface StoryAPI {
     @PUT("stories/{storyId}")
     Call<StoryModel> updateStory(@Body StoryRequestModel storyRequestModel, @Header("Authorization") String authorization,@Path("storyId") String storyId);
 
+    @PUT("stories/{storyId}/removeStory")
+    Call<Void> removeStory(@Header("Authorization") String authorization,@Path("storyId") String storyId);
+
+
 }
