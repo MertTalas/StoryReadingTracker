@@ -124,6 +124,9 @@ public class FaceDetectorProcessor  extends VisionProcessorBase<List<Face>> {
         contour.setRotZ(rotZ);
         contour.setReadingMilisecond(11);  //willbeupdated later TODO
 
+        contour.setCenterX(face.getBoundingBox().centerX());
+        contour.setCenterY(face.getBoundingBox().centerY());
+
 
         Call<Void> call=faceExperienceAPI.addContour(currentUser.getToken(),singletonCurrentStoryReading.getFaceExperienceModel().getFaceExperienceDocumentId(),contour);
         call.enqueue(new Callback<Void>() {
