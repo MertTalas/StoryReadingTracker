@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 10;
 
     private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin,buttonRegister;
+    private Button buttonLogin,buttonRegister,buttonForgotPassword;
 
 
     @Override
@@ -85,12 +85,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent to_fp_intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(to_fp_intent);
+            }
+        });
+
     }
     public void init(){
         editTextEmail = findViewById(R.id.editText_loginpage_email);
         editTextPassword = findViewById(R.id.editText_loginpage_password);
         buttonLogin = findViewById(R.id.button_loginpage_login);
         buttonRegister=findViewById(R.id.button_loginpage_register);
+        buttonForgotPassword=findViewById(R.id.button_loginpage_forgotpassword);
 
     }
 
