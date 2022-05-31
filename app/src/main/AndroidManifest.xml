@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AdminRemoveStoryActivity"
             android:exported="false" />
         <activity
