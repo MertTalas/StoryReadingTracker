@@ -20,7 +20,7 @@ import java.util.List;
 
 public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAdapter.OptionHolder> {
 
-    List<AvatarModel> allAvatars;
+    ArrayList<AvatarModel> allAvatars;
 
     public RVAvatarOptionAdapter(ArrayList<AvatarModel> allAvatars) {
         this.allAvatars = allAvatars;

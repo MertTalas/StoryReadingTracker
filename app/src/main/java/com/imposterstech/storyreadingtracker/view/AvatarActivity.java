@@ -19,6 +19,7 @@ import com.imposterstech.storyreadingtracker.adapter.RVAvatarOptionAdapter;
 import com.imposterstech.storyreadingtracker.adapter.RVSettingsPageOptionAdapter;
 import com.imposterstech.storyreadingtracker.service.AvatarAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
+import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class AvatarActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<AvatarModel> allAvatars;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
@@ -53,8 +54,8 @@ public class AvatarActivity extends AppCompatActivity {
     void init(){
         recyclerView=findViewById(R.id.rv_avatar);
 
-        allAvatars= new ArrayList<>();
         Gson gson=new GsonBuilder().setLenient().create();
+        currentUser=SingletonCurrentUser.getInstance();
 
         retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -62,7 +63,7 @@ public class AvatarActivity extends AppCompatActivity {
                 .build();
 
         avatarAPI=retrofit.create(AvatarAPI.class);
-        currentUser=SingletonCurrentUser.getInstance();
+
 
 
 
@@ -72,7 +73,7 @@ public class AvatarActivity extends AppCompatActivity {
             public void onResponse(Call<List<AvatarModel>> call, Response<List<AvatarModel>> response) {
                 if(response.isSuccessful()){
                     List<AvatarModel> tempList=response.body();
-                    avatars=new ArrayList<>(tempList);
+                    allAvatars=new ArrayList<>(tempList);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     RVAvatarOptionAdapter optionsAdapter=new RVAvatarOptionAdapter(allAvatars);
                     recyclerView.setAdapter(optionsAdapter);

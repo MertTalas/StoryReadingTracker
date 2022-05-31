@@ -32,7 +32,7 @@ public class PastReadingActivity extends AppCompatActivity {
     ArrayList<SimpleStoryUserModel> pastReadings;
     RecyclerView recyclerViewPastReadings;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     StoryUserAPI storyUserAPI;
     SingletonCurrentUser currentUser;
