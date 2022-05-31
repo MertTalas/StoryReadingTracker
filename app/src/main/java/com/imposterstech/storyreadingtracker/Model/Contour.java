@@ -45,7 +45,26 @@ public class Contour {
     private float rotZ;
     @SerializedName("readingMilisecond")
     private long readingMilisecond;
+    @SerializedName("centerX")
+    private int centerX;
+    @SerializedName("centerY")
+    private int centerY;
 
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(int centerX) {
+        this.centerX = centerX;
+    }
+
+    public int getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(int centerY) {
+        this.centerY = centerY;
+    }
 
     public List<PointF> getFaceOvalContour() {
         return faceOvalContour;
