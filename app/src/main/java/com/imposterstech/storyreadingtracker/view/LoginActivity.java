@@ -4,24 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.RoleModel;
-import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
@@ -50,8 +55,9 @@ public class LoginActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 10;
 
     private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin,buttonRegister,buttonForgotPassword;
-
+    private Button buttonLogin,buttonRegister;
+    private TextView textViewForgotPassword, textViewLoginDashboard;
+    private ImageView imageViewDashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +86,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent to_register_intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(to_register_intent);
+                Pair[] pairs = new Pair[7];
+
+                pairs[0]=new Pair<View,String>(imageViewDashboard,"logo_image");
+                pairs[1]=new Pair<View,String>(textViewLoginDashboard,"logo_text");
+                pairs[2]=new Pair<View,String>(editTextEmail,"edit_tran");
+                pairs[3]=new Pair<View,String>(editTextPassword,"edit_tran");
+                pairs[4]=new Pair<View,String>(textViewForgotPassword,"forgot_tran");
+                pairs[5]=new Pair<View,String>(buttonLogin,"btnLogin_tran");
+                pairs[6]=new Pair<View,String>(buttonRegister,"btnRegister_tran");
+
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+                    ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this,pairs);
+                    startActivity(to_register_intent, activityOptions.toBundle());
+                }
                 //finish();
             }
         });
 
-        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent to_fp_intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
@@ -99,8 +118,9 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editText_loginpage_password);
         buttonLogin = findViewById(R.id.button_loginpage_login);
         buttonRegister=findViewById(R.id.button_loginpage_register);
-        buttonForgotPassword=findViewById(R.id.button_loginpage_forgotpassword);
-
+        textViewForgotPassword =findViewById(R.id.textView_loginpage_forgotpassword);
+        textViewLoginDashboard =findViewById(R.id.textView_loginpage_dashboard);
+        imageViewDashboard =findViewById(R.id.imageViewDashboard);
     }
 
 
@@ -297,6 +317,26 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("hataaa","noluyoo");
             }
         });
+    }
+
+    public void ShowHidePass(View view){
+
+        if(view.getId()==R.id.imageViewShowPassword){
+
+            if(editTextPassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                ((ImageView)(view)).setImageResource(R.drawable.ic_hide_password);
+
+                //Show Password
+                editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                ((ImageView)(view)).setImageResource(R.drawable.ic_show_password);
+
+                //Hide Password
+                editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
     }
 
 
