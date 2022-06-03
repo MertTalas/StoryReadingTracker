@@ -3,7 +3,6 @@ package com.imposterstech.storyreadingtracker.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
-import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
+import com.imposterstech.storyreadingtracker.view.StoryFeedbackActivity;
 
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
@@ -110,6 +108,12 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
 
                 }
+                if(options.get(position).getName().equals("Give Feedback")){
+                   // Intent to_give_feedback=new Intent(holder.itemView.getContext(), StoryFeedbackActivity.class);
+                   // holder.itemView.getContext().startActivity(to_give_feedback);
+
+                }
+
             }
         });
     }

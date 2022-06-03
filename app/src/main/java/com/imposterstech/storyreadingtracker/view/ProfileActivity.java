@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.Model.Request.UpdateUserRequestModel;
+import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
 import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.service.AvatarAPI;
 import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,10 +41,12 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Button buttonApply;
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     UserAPI userAPI;
+    AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
+    List<AvatarModel> allAvatars;
 
 
     @Override
@@ -81,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent to_main_page=new Intent(this, MainPageActivity.class);
 
+
         buttonApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +120,18 @@ public class ProfileActivity extends AppCompatActivity {
 
                 startActivity(to_main_page);
                 finish();
+
+            }
+        });
+
+
+        imageButtonUserPP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent to_avatar_page=new Intent(ProfileActivity.this, AvatarActivity.class);
+                startActivity(to_avatar_page);
+                // finish();
+
 
             }
         });

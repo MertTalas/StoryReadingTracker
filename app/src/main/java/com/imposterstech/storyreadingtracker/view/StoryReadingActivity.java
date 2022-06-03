@@ -1,28 +1,17 @@
 package com.imposterstech.storyreadingtracker.view;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureException;
-import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.PointF;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
@@ -33,20 +22,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.mlkit.common.MlKitException;
-import com.google.mlkit.common.model.LocalModel;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.face.Face;
-import com.google.mlkit.vision.face.FaceContour;
-import com.google.mlkit.vision.face.FaceDetection;
-import com.google.mlkit.vision.face.FaceDetector;
-import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.imposterstech.storyreadingtracker.FaceTracking.CameraXViewModel;
 import com.imposterstech.storyreadingtracker.FaceTracking.FaceDetectorProcessor;
 import com.imposterstech.storyreadingtracker.FaceTracking.GraphicOverlay;
@@ -67,15 +45,10 @@ import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,7 +63,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     UserModel user;
-    private String BASE_URL = "http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL = "http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
     private StoryModel storyModel;
@@ -257,6 +230,9 @@ public class StoryReadingActivity extends AppCompatActivity {
                 {
                     isStarted=false;
                     imageProcessor.stop();
+                    Intent to_feedback_page=new Intent(StoryReadingActivity.this, StoryFeedbackActivity.class);
+                    startActivity(to_feedback_page);
+                    finish();
 
                 }
 
