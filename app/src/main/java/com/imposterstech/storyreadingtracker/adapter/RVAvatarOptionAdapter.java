@@ -1,29 +1,72 @@
 package com.imposterstech.storyreadingtracker.adapter;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.Model.AvatarOptions;
+import com.imposterstech.storyreadingtracker.Model.Request.AvatarRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
 
+import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.service.AvatarAPI;
+import com.imposterstech.storyreadingtracker.service.StoryAPI;
 
 
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAdapter.OptionHolder> {
 
     ArrayList<AvatarModel> allAvatars;
+    Context context;
+    int i = 1;
+
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    Retrofit retrofit;
+    AvatarAPI avatarAPI;
+    SingletonCurrentUser currentUser;
 
     public RVAvatarOptionAdapter(ArrayList<AvatarModel> allAvatars) {
         this.allAvatars = allAvatars;
+        Gson gson=new GsonBuilder().setLenient().create();
+        currentUser=SingletonCurrentUser.getInstance();
+
+        retrofit=new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        avatarAPI=retrofit.create(AvatarAPI.class);
 
     }
 
@@ -31,15 +74,82 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
     @Override
     public RVAvatarOptionAdapter.OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_avatar_option_row, parent, false);
+        context = parent.getContext();
+
         return new RVAvatarOptionAdapter.OptionHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RVAvatarOptionAdapter.OptionHolder holder, int position) {
-        holder.textViewAvatarName.setText(allAvatars.get(position).getAvatarName());
-      //  holder.imageViewAvatar.setImageResource(allAvatars.get(position).getAvatarURL());
+
+        holder.textViewAvatarName.setText("Avatar Name: "+allAvatars.get(position).getAvatarName());
+        holder.textViewAvatarPrice.setText("Avatar Price: "+String.valueOf(allAvatars.get(position).getAvatarPrice()));
+        Resources res = holder.itemView.getContext().getResources();
+
+        String fnm = "avatar"+i; //  this is image file name
+        String PACKAGE_NAME = context.getPackageName();
+        int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+        holder.imageViewAvatar.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                View viewAlert = inflater.inflate( R.layout.av_buy_avatar, null );
+                ImageView imageView =viewAlert.findViewById(R.id.imageView_buy_avatar_image);
+                imageView.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+                AlertDialog.Builder ad = new AlertDialog.Builder(context);
+                ad.setView(viewAlert);
+                ad.setNegativeButton("Cancel",null);
+
+                ad.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AvatarRequestModel avatarRequestModel = new AvatarRequestModel();
+                        avatarRequestModel.setAvatarName(allAvatars.get(position).getAvatarName());
+                        avatarRequestModel.setAvatarPrice(allAvatars.get(position).getAvatarPrice());
+                        avatarRequestModel.setAvatarURL(allAvatars.get(position).getAvatarURL());
+
+                        Call<AvatarModel> call=avatarAPI.buyAvatar(avatarRequestModel, currentUser.getToken());
+                        call.enqueue(new Callback<AvatarModel>() {
+                            @Override
+                            public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {
+                                if(response.isSuccessful()){
+                                    allAvatars.add(allAvatars.get(position));
+                                    Toast.makeText(view.getContext(), "Avatar bought!!",Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    try {
+                                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                        Toast.makeText(context, jObjError.getJSONObject("error").getString("message"), Toast.LENGTH_LONG).show();
+                                    } catch (Exception e) {
+                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                }
+
+
+
+
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<AvatarModel> call, Throwable t) {
+                                Toast.makeText(view.getContext(), "Cant retrieve data",Toast.LENGTH_LONG).show();
+
+
+                            }
+                        });
+                    }
+                });
+                ad.create().show();
+            }
+        });
+
+        i++;
     }
 
     @Override
@@ -49,12 +159,13 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
 
     public class OptionHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewAvatarName;
+        public TextView textViewAvatarName,textViewAvatarPrice;
         public ImageView imageViewAvatar;
+
 
         public OptionHolder(@NonNull View itemView) {
             super(itemView);
-
+            textViewAvatarPrice=(TextView)itemView.findViewById(R.id.textView_avatar_price);
             textViewAvatarName=(TextView)itemView.findViewById(R.id.textView_avatar_name);
             imageViewAvatar=(ImageView) itemView.findViewById(R.id.imageView_avatar_picture);
 

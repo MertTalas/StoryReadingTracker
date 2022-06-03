@@ -35,7 +35,7 @@ public class AvatarActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<AvatarModel> allAvatars;
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
@@ -82,7 +82,7 @@ public class AvatarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<AvatarModel>> call, Throwable t) {
-                Log.d("FAİL","FAİLUREEEEE");
+
 
 
             }
