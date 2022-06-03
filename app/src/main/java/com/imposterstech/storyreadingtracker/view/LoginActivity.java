@@ -47,7 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     private String token;
 

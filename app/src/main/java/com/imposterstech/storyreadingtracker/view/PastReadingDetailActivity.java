@@ -41,7 +41,7 @@ public class PastReadingDetailActivity extends AppCompatActivity {
     private GraphicOverlay graphicOverlay;
 
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
     FaceExperienceAPI faceExperienceAPI;
     SingletonCurrentUser currentUser;

@@ -5,16 +5,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.Model.AvatarOptions;
+import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
 import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
-import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
-import com.imposterstech.storyreadingtracker.adapter.RVAdminUpdateStoryAdapter;
-import com.imposterstech.storyreadingtracker.adapter.RVStoryReadingPageAdapter;
+import com.imposterstech.storyreadingtracker.adapter.RVAvatarOptionAdapter;
+import com.imposterstech.storyreadingtracker.adapter.RVSettingsPageOptionAdapter;
+import com.imposterstech.storyreadingtracker.service.AvatarAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
 import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 
@@ -27,26 +30,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AdminEditStoryActivity extends AppCompatActivity {
-    ArrayList<StoryModel> allStories;
-    RecyclerView recyclerViewAllStories;
+public class AvatarActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    ArrayList<AvatarModel> allAvatars;
 
     private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
     Retrofit retrofit;
-    StoryAPI storyAPI;
+    AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
+    List<AvatarModel> avatars;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_edit_story);
+        setContentView(R.layout.activity_avatar);
+
         init();
     }
 
-
     void init(){
-        recyclerViewAllStories=findViewById(R.id.recyclerview_admin_editstory_page);
+        recyclerView=findViewById(R.id.rv_avatar);
 
         Gson gson=new GsonBuilder().setLenient().create();
         currentUser=SingletonCurrentUser.getInstance();
@@ -56,31 +62,29 @@ public class AdminEditStoryActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        storyAPI=retrofit.create(StoryAPI.class);
+        avatarAPI=retrofit.create(AvatarAPI.class);
 
-        Call<List<StoryModel>> call=storyAPI.getAllStories(currentUser.getToken());
 
-        call.enqueue(new Callback<List<StoryModel>>() {
+
+
+        Call<List<AvatarModel>> getCall=avatarAPI.getAllAvatars(currentUser.getToken());
+        getCall.enqueue(new Callback<List<AvatarModel>>() {
             @Override
-            public void onResponse(Call<List<StoryModel>> call, Response<List<StoryModel>> response) {
+            public void onResponse(Call<List<AvatarModel>> call, Response<List<AvatarModel>> response) {
                 if(response.isSuccessful()){
-                    List<StoryModel> tempList=response.body();
-                    recyclerViewAllStories.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                    allStories=new ArrayList<>(tempList);
-
-                    RVAdminUpdateStoryAdapter rvAdminUpdateStoryAdapter=new RVAdminUpdateStoryAdapter(allStories);
-                    recyclerViewAllStories.setAdapter(rvAdminUpdateStoryAdapter);
-
-
-
+                    List<AvatarModel> tempList=response.body();
+                    allAvatars=new ArrayList<>(tempList);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    RVAvatarOptionAdapter optionsAdapter=new RVAvatarOptionAdapter(allAvatars);
+                    recyclerView.setAdapter(optionsAdapter);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<StoryModel>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"API connection problem",Toast.LENGTH_LONG).show();
-                finish();
+            public void onFailure(Call<List<AvatarModel>> call, Throwable t) {
+
+
+
             }
         });
 
@@ -90,7 +94,6 @@ public class AdminEditStoryActivity extends AppCompatActivity {
 
 
     }
-
 
 
 }

@@ -42,7 +42,7 @@
 
 
     <FrameLayout
-        android:id="@+id/container_past_readig"
+        android:id="@+id/container_past_reading"
         android:layout_width="328dp"
         android:layout_height="210dp"
         android:layout_marginStart="43dp"
@@ -63,8 +63,8 @@
             android:id="@+id/graphic_overlay_past_reading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="@id/container_past_readig"
-            app:layout_constraintStart_toStartOf="@id/container_past_readig" />
+            app:layout_constraintEnd_toEndOf="@id/container_past_reading"
+            app:layout_constraintStart_toStartOf="@id/container_past_reading" />
 
 
     </FrameLayout>
