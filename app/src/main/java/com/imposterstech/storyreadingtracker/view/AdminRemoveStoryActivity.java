@@ -30,7 +30,7 @@ public class AdminRemoveStoryActivity extends AppCompatActivity {
     ArrayList<StoryModel> allStories;
     RecyclerView recyclerViewAllStories;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
     Retrofit retrofit;
     StoryAPI storyAPI;
     SingletonCurrentUser currentUser;
