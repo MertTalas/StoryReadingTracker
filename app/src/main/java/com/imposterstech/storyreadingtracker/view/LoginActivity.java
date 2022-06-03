@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.RoleModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
@@ -47,7 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     private String token;
 

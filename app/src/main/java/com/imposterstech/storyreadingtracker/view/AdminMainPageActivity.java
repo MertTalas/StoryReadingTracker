@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
@@ -31,7 +32,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewOptions;
     UserAPI userAPI;
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
 
     @Override

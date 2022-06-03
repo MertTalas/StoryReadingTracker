@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.FaceTracking.CameraXViewModel;
 import com.imposterstech.storyreadingtracker.FaceTracking.FaceGraphic;
 import com.imposterstech.storyreadingtracker.FaceTracking.GraphicOverlay;
@@ -41,7 +42,7 @@ public class PastReadingDetailActivity extends AppCompatActivity {
     private GraphicOverlay graphicOverlay;
 
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     FaceExperienceAPI faceExperienceAPI;
     SingletonCurrentUser currentUser;
