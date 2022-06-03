@@ -16,6 +16,12 @@
             android:name=".view.StoryFeedbackActivity"
             android:exported="false" />
         <activity
+            android:name=".view.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AdminRemoveStoryActivity"
             android:exported="false" />
         <activity
