@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Request.UpdateUserRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
 import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
@@ -41,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Button buttonApply;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     UserAPI userAPI;
     AvatarAPI avatarAPI;

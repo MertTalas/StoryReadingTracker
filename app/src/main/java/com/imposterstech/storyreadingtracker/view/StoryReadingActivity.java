@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.mlkit.common.MlKitException;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.FaceTracking.CameraXViewModel;
 import com.imposterstech.storyreadingtracker.FaceTracking.FaceDetectorProcessor;
 import com.imposterstech.storyreadingtracker.FaceTracking.GraphicOverlay;
@@ -63,7 +64,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     UserModel user;
-    private String BASE_URL = "http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL = BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     private String token;
     private StoryModel storyModel;

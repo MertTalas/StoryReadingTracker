@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.AvatarOptions;
 import com.imposterstech.storyreadingtracker.Model.Request.AvatarRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
@@ -51,7 +52,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
     Context context;
     int i = 1;
 
-    private String BASE_URL="http://192.168.1.42:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
