@@ -1,5 +1,6 @@
 package com.imposterstech.storyreadingtracker.view;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
@@ -7,18 +8,30 @@ import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,9 +88,18 @@ public class StoryReadingActivity extends AppCompatActivity {
     SingletonCurrentUser currentUser;
     FaceExperienceModel faceExperienceModel;
 
+
+
     private int failAttemp;
     private int successfullAttemp;
 
+    TextView textViewSpeechText;
+    ImageView imageViewStoryMic;
+    int count = 0;
+    SpeechRecognizer speechRecognizer;
+    String sentenceControl="";
+    int wordCounter=0;
+    int charCounter = 0;
 
     private TextView textViewTitle, textViewStoryText;
     private ImageButton imageButtonRestart, imageButtonSkip, imageButtonExit, imageButtonCamera;
@@ -359,7 +381,142 @@ public class StoryReadingActivity extends AppCompatActivity {
         currentUser=SingletonCurrentUser.getInstance();
         //real time face detection
 
+        ArrayList<String> words = new ArrayList<>();
 
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS,20000);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS,60000);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+
+        SpannableString SS = new SpannableString(textViewStoryText.getText().toString());
+        ForegroundColorSpan fcsGreen = new ForegroundColorSpan(Color.GREEN);
+        ForegroundColorSpan fcsRed = new ForegroundColorSpan(Color.RED);
+
+        setWords(words);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+        }
+
+        imageViewStoryMic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (count == 0) {
+                    count = 1;
+                    imageViewStoryMic.setColorFilter(Color.RED);
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                } else{
+                    imageViewStoryMic.setColorFilter(Color.BLACK);
+                    speechRecognizer.stopListening();
+                    count = 0;
+                }
+            }
+        });
+        textViewSpeechText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String remainingSentence = String.valueOf(charSequence.subSequence(i1, i2));
+                if (!remainingSentence.equals("")) {
+                    if (remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+1;
+
+                    } if(remainingSentence.replaceAll("[^a-zA-Z]+", "").equals((words.get(wordCounter)+words.get(wordCounter+1)).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+words.get(wordCounter+1).length()+2;
+                        wordCounter++;
+
+                    }
+                    else if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsRed, charCounter, charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+1;
+
+                    }
+                    wordCounter++;
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int i) {
+
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+                ArrayList<String> data = bundle.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
+                if (!sentenceControl.equals(data.get(0))) {
+                    textViewSpeechText.setText(data.get(0));
+                    sentenceControl = data.get(0);
+                }
+            }
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
+            }
+
+        });
+
+
+    }
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+     /*   switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK && data!=null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    ArrayList<String> copyResult = new ArrayList<>();
+                    int counter = 0;
+                    txt.setText(result.get(0));
+                }
+        }*/
 
     }
     private void setTextSize () {
@@ -462,5 +619,27 @@ public class StoryReadingActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT);
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT);
+            }
+        }
+    }
+
+    public void setWords(ArrayList words){
+        String [] allWords = textViewStoryText.getText().toString().split(" ");
+        for(String word: allWords ){
+            words.add(word);
+
+        }
+
+    }
 }
 
