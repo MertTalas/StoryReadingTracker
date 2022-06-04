@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.StoryFeedbackActivity">
+    tools:context=".view.StoryFeedbackActivity"
+    android:background="@color/surface">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="159dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/textView_feedback_dashboard"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_dashboard"
+        android:fontFamily="@font/average_sans"
         android:text="Feedback"
-        android:textAlignment="center"
-        android:textSize="34sp"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,43 +28,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/button_selector"
+        app:layout_constraintBottom_toTopOf="@+id/textView_feedback_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_rating" />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="255dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="52dp"
+        android:id="@+id/textView_feedback_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="45dp"
+        android:fontFamily="@font/open_sans"
         android:text="Please leave your feedback below:"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar_feedback" />
 
-    <Button
-        android:id="@+id/submit_feedback_button"
+    <TextView
+        android:id="@+id/textView_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="137dp"
-        android:text="SUBMİT"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:text="How much do you like this story?"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_feedback_dashboard" />
+
+    <Button
+        android:id="@+id/submit_feedback_button"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_action"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:text="Submıt"
+        android:textColor="@color/background"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText_feedback_body" />
 
     <EditText
         android:id="@+id/editTextText_feedback_body"
-        android:layout_width="237dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginBottom="137dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/submit_feedback_button"
+        android:layout_width="370dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:hint="feedback..."
+        android:padding="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_feedback_comment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

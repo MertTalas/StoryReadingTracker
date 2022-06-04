@@ -4,21 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PastReadingActivity">
+    tools:context=".view.PastReadingActivity"
+    android:background="@color/surface">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_past_reading_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textViewPastReadings"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_dashboard"
+        android:fontFamily="@font/average_sans"
+        android:text="Past Readings"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_past_reading_page"
+        android:layout_width="400dp"
+        android:layout_height="630dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPastReadings" />
 
 
 

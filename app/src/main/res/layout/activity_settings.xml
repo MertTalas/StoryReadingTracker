@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SettingsActivity">
+    tools:context=".view.SettingsActivity"
+    android:background="@color/surface">
 
     <TextView
         android:id="@+id/textViewSettingsPage"
@@ -24,8 +25,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_settings_page"
         android:layout_width="400dp"
-        android:layout_height="700dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="630dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

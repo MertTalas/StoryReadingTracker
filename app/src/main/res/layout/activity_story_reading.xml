@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/surface"
     tools:context=".view.StoryReadingActivity">
 
     <TextView
         android:id="@+id/textView_story_reading_page_story_text"
-        android:layout_width="384dp"
-        android:layout_height="275dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="385dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_selector"
         android:elevation="10dp"
         android:padding="10dp"
@@ -18,10 +19,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_storyReadingStartReading" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
 
     <TextView
-        android:id="@+id/textView_story_reading_page_title"
+        android:id="@+id/textView_story_reading_page_dashboard"
         android:layout_width="412dp"
         android:layout_height="100dp"
         android:background="@drawable/button_dashboard"
@@ -35,6 +36,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView_story_reading_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/average_sans"
+        android:hint="Title of Story"
+        android:textColor="@color/on_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:transitionName="logo_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_storyReadingStartReading" />
 
     <FrameLayout
         android:id="@+id/container_camera"
@@ -75,7 +90,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ImageButton_toolbar_skip"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_dashboard" />
 
     <Button
         android:id="@+id/ImageButton_toolbar_skip"
@@ -90,7 +105,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_storyReadingStartReading"
-        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_dashboard" />
 
     <Button
         android:id="@+id/ImageButton_toolbar_camera"
