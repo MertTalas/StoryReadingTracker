@@ -89,6 +89,7 @@
         android:hint="feedback..."
         android:padding="10dp"
         android:textSize="14sp"
+        android:gravity="top|left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_feedback_comment" />

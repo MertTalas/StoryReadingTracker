@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class AvatarActivity extends AppCompatActivity {
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;
     List<AvatarModel> avatars;
+    TextView textViewUserCoinAmount;
 
 
 
@@ -52,10 +54,12 @@ public class AvatarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_avatar);
 
         init();
+        textViewUserCoinAmount.setText(String.valueOf(currentUser.getLoggedUser().getPoints()));
     }
 
     void init(){
         recyclerView=findViewById(R.id.rv_avatar);
+        textViewUserCoinAmount=findViewById(R.id.textView_avatar_user_coin_amount);
 
         Gson gson=new GsonBuilder().setLenient().create();
         currentUser=SingletonCurrentUser.getInstance();

@@ -52,7 +52,6 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
     Context context;
     int i = 1;
 
-
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
 
     Retrofit retrofit;
@@ -78,7 +77,6 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
     public RVAvatarOptionAdapter.OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_avatar_option_row, parent, false);
         context = parent.getContext();
-
         return new RVAvatarOptionAdapter.OptionHolder(itemView);
     }
 
@@ -171,7 +169,6 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
             textViewAvatarPrice=(TextView)itemView.findViewById(R.id.textView_avatar_price);
             textViewAvatarName=(TextView)itemView.findViewById(R.id.textView_avatar_name);
             imageViewAvatar=(ImageView) itemView.findViewById(R.id.imageView_avatar_picture);
-
         }
     }
 }
