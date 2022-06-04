@@ -17,6 +17,7 @@ import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -78,9 +79,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     private TextView textViewTitle, textViewStoryText;
-    private ImageButton imageButtonRestart, imageButtonSkip, imageButtonExit, imageButtonCamera;
-    //private PreviewView previewView;
-    private Button buttonStartReading;
+    private Button buttonStartReading, imageButtonRestart, imageButtonSkip, imageButtonCamera;
 
     private static final String TAG = "CameraXLivePreview";
 
@@ -108,6 +107,7 @@ public class StoryReadingActivity extends AppCompatActivity {
     private CameraSelector cameraSelector;
 
     private boolean isStarted;
+    private boolean isHide;
 
     List<Contour> contourList;
 
@@ -125,8 +125,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         isStarted=false;
         init();
         graphicOverlay = findViewById(R.id.graphic_overlay);
-
-
+        isHide = false;
 
 
 
@@ -349,7 +348,6 @@ public class StoryReadingActivity extends AppCompatActivity {
         textViewTitle = findViewById(R.id.textView_story_reading_page_title);
         imageButtonRestart = findViewById(R.id.ImageButton_toolbar_restart);
         imageButtonCamera = findViewById(R.id.ImageButton_toolbar_camera);
-        imageButtonExit = findViewById(R.id.ImageButton_toolbar_exit);
         imageButtonSkip = findViewById(R.id.ImageButton_toolbar_skip);
         previewView = findViewById(R.id.preview_view);
         buttonStartReading = findViewById(R.id.button_storyReadingStartReading);
@@ -458,6 +456,40 @@ public class StoryReadingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void slideUp(View view){
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(
+                0,
+                0,
+                view.getHeight(),
+                0);
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    public void slideDown(View view){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,
+                0,
+                0,
+                view.getHeight());
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    public void onSlideViewButtonClick(View view) {
+        if (isHide) {
+            slideDown(previewView);
+            imageButtonCamera.setText("Show Camera");
+        } else {
+            slideUp(previewView);
+            imageButtonCamera.setText("Hide Camera");
+        }
+        isHide = !isHide;
     }
 
 }
