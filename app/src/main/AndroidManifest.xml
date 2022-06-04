@@ -14,6 +14,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.RankingActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AdminFeedbackCheckActivity"
             android:exported="false" />
         <activity

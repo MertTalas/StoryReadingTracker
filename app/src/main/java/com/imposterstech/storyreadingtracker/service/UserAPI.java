@@ -5,6 +5,8 @@ import com.imposterstech.storyreadingtracker.Model.Request.RegisterRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Request.UpdateUserRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -29,6 +31,9 @@ public interface UserAPI {
 
     @PUT("users/updateUser")
     Call<UserModel> updateUser(@Header("Authorization") String authorization, @Body UpdateUserRequestModel userUpdateRequestModel);
+
+    @GET("users/getAllNormal")
+    Call<List<UserModel>> getAllNormalUserListByPoints(@Header("Authorization") String authorization);
 
 }
 
