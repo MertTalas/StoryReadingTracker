@@ -44,7 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
     ArrayAdapter ageArrayAdapter;
     ArrayAdapter genderArrayAdapter;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
 
     @Override

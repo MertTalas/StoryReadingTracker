@@ -48,7 +48,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     UserModel user;
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     private String token;
 

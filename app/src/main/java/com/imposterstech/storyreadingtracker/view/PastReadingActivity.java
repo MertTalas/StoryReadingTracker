@@ -33,6 +33,7 @@ public class PastReadingActivity extends AppCompatActivity {
     ArrayList<SimpleStoryUserModel> pastReadings;
     RecyclerView recyclerViewPastReadings;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     StoryUserAPI storyUserAPI;

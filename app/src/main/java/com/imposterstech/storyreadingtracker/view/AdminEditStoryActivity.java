@@ -32,7 +32,9 @@ public class AdminEditStoryActivity extends AppCompatActivity {
     ArrayList<StoryModel> allStories;
     RecyclerView recyclerViewAllStories;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     StoryAPI storyAPI;
     SingletonCurrentUser currentUser;

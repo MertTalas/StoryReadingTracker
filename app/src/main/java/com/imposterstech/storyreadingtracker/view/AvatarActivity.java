@@ -36,7 +36,9 @@ public class AvatarActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<AvatarModel> allAvatars;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;

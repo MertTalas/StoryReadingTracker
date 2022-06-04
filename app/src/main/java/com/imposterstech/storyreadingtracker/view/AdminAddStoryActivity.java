@@ -27,7 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AdminAddStoryActivity extends AppCompatActivity {
     UserAPI userAPI;
     StoryAPI storyAPI;
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     SingletonCurrentUser currentUser;
 
