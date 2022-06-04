@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Response.FeedbackModel;
 import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
@@ -34,7 +35,7 @@ public class AdminFeedbackCheckActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewFeedbacks;
     FeedbackAPI feedbackAPI;
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     SingletonCurrentUser currentUser;
 
