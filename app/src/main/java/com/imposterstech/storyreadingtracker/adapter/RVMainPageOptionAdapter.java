@@ -18,6 +18,7 @@ import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.MainPageActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
+import com.imposterstech.storyreadingtracker.view.RankingActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
@@ -65,6 +66,11 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
                 if(options.get(position).getName().equals("Profile")){
                     Intent to_readstory_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
                     holder.itemView.getContext().startActivity(to_readstory_intent);
+
+                }
+                if(options.get(position).getName().equals("Ranking")){
+                    Intent to_ranking_intent=new Intent(holder.itemView.getContext(), RankingActivity.class);
+                    holder.itemView.getContext().startActivity(to_ranking_intent);
 
                 }
 
