@@ -1,18 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_avatar"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="1dp"
-    android:layout_marginTop="1dp"
-    android:layout_marginEnd="1dp"
-    android:layout_marginBottom="1dp"/>
-</LinearLayout>
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.AvatarActivity"
+    android:background="@color/surface">
+
+    <TextView
+        android:id="@+id/textView_SelectAvatar"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_dashboard"
+        android:fontFamily="@font/average_sans"
+        android:text="Select/Buy Avatar"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_avatar_user_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Amount of coins you have:"
+        android:textColor="@color/on_primary"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_SelectAvatar" />
+
+    <TextView
+        android:id="@+id/textView_avatar_user_coin_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Amount"
+        android:textColor="@color/on_primary"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/textView_avatar_user_coin"
+        app:layout_constraintTop_toBottomOf="@+id/textView_SelectAvatar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_avatar"
+        android:layout_width="400dp"
+        android:layout_height="630dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_avatar_user_coin"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
