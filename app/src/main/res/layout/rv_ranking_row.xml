@@ -12,7 +12,7 @@
         android:id="@+id/ranking_page_textview_order"
         android:layout_width="62dp"
         android:layout_height="33dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:text="order"
@@ -20,7 +20,8 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.265">
 
     </TextView>
 
@@ -28,8 +29,8 @@
         android:id="@+id/ranking_page_textview_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="40dp"
         android:text="username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ranking_page_textview_order"></TextView>
@@ -38,10 +39,23 @@
         android:id="@+id/ranking_page_textview_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="101dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="152dp"
         android:text="points"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ranking_page_imageView_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_main_profile_option" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
