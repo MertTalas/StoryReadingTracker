@@ -81,7 +81,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
     private TextView textViewTitle, textViewStoryText;
-    private Button buttonStartReading, imageButtonRestart, imageButtonSkip, imageButtonCamera;
+    private Button buttonStartReading, imageButtonSkip, imageButtonCamera;
 
     private static final String TAG = "CameraXLivePreview";
 
@@ -183,6 +183,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<StoryUserModel> call, Response<StoryUserModel> response) {
                                         if(response.isSuccessful()){
+                                            buttonStartReading.setText("Stop Readıng");
 
                                             Toast.makeText(getApplicationContext(),"Reading experience saved.",Toast.LENGTH_LONG).show();
                                         }
@@ -230,6 +231,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    buttonStartReading.setText("Start Readıng");
                     isStarted=false;
                     imageProcessor.stop();
                     Intent to_feedback_page=new Intent(StoryReadingActivity.this, StoryFeedbackActivity.class);
@@ -348,7 +350,6 @@ public class StoryReadingActivity extends AppCompatActivity {
 
         textViewStoryText = findViewById(R.id.textView_story_reading_page_story_text);
         textViewTitle = findViewById(R.id.textView_story_reading_page_title);
-        imageButtonRestart = findViewById(R.id.ImageButton_toolbar_restart);
         imageButtonCamera = findViewById(R.id.ImageButton_toolbar_camera);
         imageButtonSkip = findViewById(R.id.ImageButton_toolbar_skip);
         previewView = findViewById(R.id.preview_view);

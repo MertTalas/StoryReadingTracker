@@ -18,7 +18,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImageButton_toolbar_restart" />
+        app:layout_constraintTop_toBottomOf="@+id/button_storyReadingStartReading" />
 
     <TextView
         android:id="@+id/textView_story_reading_page_title"
@@ -73,23 +73,8 @@
         android:text="Start Readıng"
         android:textSize="12dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/ImageButton_toolbar_restart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
-
-    <Button
-        android:id="@+id/ImageButton_toolbar_restart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_selector"
-        android:fontFamily="@font/open_sans"
-        android:padding="10dp"
-        android:text="Restart Story"
-        android:textSize="12dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ImageButton_toolbar_skip"
-        app:layout_constraintStart_toEndOf="@+id/button_storyReadingStartReading"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
 
     <Button
@@ -104,7 +89,7 @@
         android:textSize="12dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ImageButton_toolbar_restart"
+        app:layout_constraintStart_toEndOf="@+id/button_storyReadingStartReading"
         app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
 
     <Button

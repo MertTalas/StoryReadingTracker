@@ -44,7 +44,7 @@ public class RVRankingPageAdapter extends RecyclerView.Adapter<RVRankingPageAdap
 
     @Override
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
-        holder.textViewOrder.setText(position+"");
+        holder.textViewOrder.setText((position+1)+"");
         holder.textViewUsername.setText(allUsers.get(position).getFirstName()+ " "+allUsers.get(position).getLastName());
         holder.textViewPoint.setText(allUsers.get(position).getPoints()+"");
 

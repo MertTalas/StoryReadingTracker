@@ -83,14 +83,14 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
                     holder.itemView.startAnimation(animation);
 
                 }
-                /*if(options.get(position).getName().equals("Ranking")){
+                if(options.get(position).getName().equals("Ranking")){
                     Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
                     Intent to_ranking_intent=new Intent(holder.itemView.getContext(), RankingActivity.class);
                     holder.itemView.getContext().startActivity(to_ranking_intent);
                     holder.itemView.setVisibility(view.VISIBLE);
                     holder.itemView.startAnimation(animation);
 
-                }*\
+                }
 
 
 
