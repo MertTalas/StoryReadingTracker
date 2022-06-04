@@ -2,10 +2,10 @@ package com.imposterstech.storyreadingtracker.adapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.imposterstech.storyreadingtracker.BASEURL;
-import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
-import com.imposterstech.storyreadingtracker.Model.SingletonCurrentEditableStory;
+import com.imposterstech.storyreadingtracker.Model.Response.FeedbackModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
-import com.imposterstech.storyreadingtracker.service.StoryAPI;
-import com.imposterstech.storyreadingtracker.view.AdminEditStoryDetailActivity;
+import com.imposterstech.storyreadingtracker.service.FeedbackAPI;
 
 import java.util.ArrayList;
 
@@ -30,64 +28,66 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RVAdminRemoveStoryAdapter extends RecyclerView.Adapter<RVAdminRemoveStoryAdapter.OptionHolder>{
+public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedbackAdapter.OptionHolder> {
 
 
-    ArrayList<StoryModel> allStories;
-
+    ArrayList<FeedbackModel> allFeedbacks;
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
-
     Retrofit retrofit;
-    StoryAPI storyAPI;
+    FeedbackAPI feedbackAPI;
     SingletonCurrentUser currentUser;
 
 
 
-
-    public RVAdminRemoveStoryAdapter(ArrayList<StoryModel> allStories) {
-        this.allStories = allStories;
+    public RVAdminFeedbackAdapter(ArrayList<FeedbackModel> allFeedbacks) {
+        this.allFeedbacks = allFeedbacks;
         Gson gson=new GsonBuilder().setLenient().create();
-        currentUser=SingletonCurrentUser.getInstance();
+        currentUser= SingletonCurrentUser.getInstance();
 
         retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        storyAPI=retrofit.create(StoryAPI.class);
+        feedbackAPI=retrofit.create(FeedbackAPI.class);
     }
+
+
+
 
     @NonNull
     @Override
     public OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_admin_remove_story_row, parent, false);
-        return new RVAdminRemoveStoryAdapter.OptionHolder(itemView);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_admin_feedback_row, parent, false);
+        return new RVAdminFeedbackAdapter.OptionHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
-        holder.textViewStoryTitle.setText(allStories.get(position).getTitle());
-        holder.textViewStoryDate.setText(allStories.get(position).getUpdatedOn().toString());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.textViewStoryTitle.setText(allFeedbacks.get(position).getStoryDetails().getTitle());
+        holder.textViewFeedbackDate.setText(allFeedbacks.get(position).getCreatedOn().toString());
+        holder.textViewFeedbackText.setText(allFeedbacks.get(position).getFeedbackText());
+
+        holder.imageViewCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
-                                Call<Void> removeCall=storyAPI.removeStory(currentUser.getToken(), allStories.get(position).getStoryId());
+                                Call<Void> checkCall=feedbackAPI.checkFeedback(currentUser.getToken(), allFeedbacks.get(position).getFeedbackId());
 
-                                removeCall.enqueue(new Callback<Void>() {
+                                checkCall.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if(response.isSuccessful()){
-                                            allStories.remove(allStories.get(position));
+                                            allFeedbacks.remove(allFeedbacks.get(position));
                                             notifyItemRemoved(position);
-
-                                            Toast.makeText(view.getContext(), "Story deletedd!!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(view.getContext(), "Feedback checked!!",Toast.LENGTH_LONG).show();
                                         }
                                     }
 
@@ -96,7 +96,6 @@ public class RVAdminRemoveStoryAdapter extends RecyclerView.Adapter<RVAdminRemov
                                         Toast.makeText(view.getContext(), "Fail!!",Toast.LENGTH_LONG).show();
                                     }
                                 });
-
                                 //Yes button clicked
                                 break;
 
@@ -108,8 +107,14 @@ public class RVAdminRemoveStoryAdapter extends RecyclerView.Adapter<RVAdminRemov
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Do you want to remove the story ?? "+allStories.get(position).getTitle()+" ??").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Do you want to check the feedback as read ?? ").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
+
+
+
+
+
+
 
             }
         });
@@ -117,19 +122,24 @@ public class RVAdminRemoveStoryAdapter extends RecyclerView.Adapter<RVAdminRemov
 
     @Override
     public int getItemCount() {
-        return allStories.size();
+        return allFeedbacks.size();
     }
 
-    public class OptionHolder extends RecyclerView.ViewHolder{
+    public class OptionHolder extends RecyclerView.ViewHolder {
 
-        public TextView textViewStoryTitle,textViewStoryDate;
+        public TextView textViewStoryTitle,textViewFeedbackDate,textViewFeedbackText;
+        ImageView imageViewCheck;
 
         public OptionHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewStoryTitle=(TextView)itemView.findViewById(R.id.admin_story_removepage_title);
-            textViewStoryDate=(TextView)itemView.findViewById(R.id.admin_story_removepage_date);
+            textViewStoryTitle = (TextView) itemView.findViewById(R.id.textView_feedback_storytitle);
+            textViewFeedbackDate = (TextView) itemView.findViewById(R.id.textView_feedback_feedbackdate);
+            textViewFeedbackText = (TextView) itemView.findViewById(R.id.admin_feedback_page_rv_textview_feedbacktext);
+            imageViewCheck = (ImageView) itemView.findViewById(R.id.admin_feedback_page_rv_imageview_check);
 
         }
+
     }
+
 }

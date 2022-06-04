@@ -42,7 +42,9 @@ public class PastReadingDetailActivity extends AppCompatActivity {
     private GraphicOverlay graphicOverlay;
 
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     FaceExperienceAPI faceExperienceAPI;
     SingletonCurrentUser currentUser;

@@ -19,6 +19,8 @@ public class UserModel {
     private int points;
     @SerializedName("termsAndPoliciesAccepted")
     private boolean termsAndPoliciesAccepted;
+    @SerializedName("chosenAvatarUrl")
+    private String chosenAvatarUrl;
 
 
     public String getUserId() {
@@ -83,5 +85,13 @@ public class UserModel {
 
     public void setTermsAndPoliciesAccepted(boolean termsAndPoliciesAccepted) {
         this.termsAndPoliciesAccepted = termsAndPoliciesAccepted;
+    }
+
+    public String getChosenAvatarUrl() {
+        return chosenAvatarUrl;
+    }
+
+    public void setChosenAvatarUrl(String chosenAvatarUrl) {
+        this.chosenAvatarUrl = chosenAvatarUrl;
     }
 }

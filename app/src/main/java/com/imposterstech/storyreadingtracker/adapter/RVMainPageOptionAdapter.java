@@ -20,6 +20,7 @@ import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.MainPageActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
+import com.imposterstech.storyreadingtracker.view.RankingActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 

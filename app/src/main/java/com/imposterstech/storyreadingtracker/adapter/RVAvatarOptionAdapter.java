@@ -52,7 +52,9 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
     Context context;
     int i = 1;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;

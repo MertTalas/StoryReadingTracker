@@ -14,6 +14,7 @@ import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.view.AdminAddStoryActivity;
 import com.imposterstech.storyreadingtracker.view.AdminEditStoryActivity;
+import com.imposterstech.storyreadingtracker.view.AdminFeedbackCheckActivity;
 import com.imposterstech.storyreadingtracker.view.AdminRemoveStoryActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
@@ -57,8 +58,8 @@ public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOp
                     holder.itemView.getContext().startActivity(to_removestory_intent);
                 }
                 if(options.get(position).equals("List Feedbacks")){
-                  //  Intent to_readstory_intent=new Intent(holder.itemView.getContext(), PastReadingActivity.class);
-                  //  holder.itemView.getContext().startActivity(to_readstory_intent);
+                    Intent to_feedback_intent=new Intent(holder.itemView.getContext(), AdminFeedbackCheckActivity.class);
+                    holder.itemView.getContext().startActivity(to_feedback_intent);
 
                 }
                 if(options.get(position).equals("Update Story")){

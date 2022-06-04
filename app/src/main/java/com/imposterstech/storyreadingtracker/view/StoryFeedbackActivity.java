@@ -38,7 +38,9 @@ public class StoryFeedbackActivity extends AppCompatActivity {
 
     FeedbackAPI feedbackAPI;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     SingletonCurrentUser currentUser;
 

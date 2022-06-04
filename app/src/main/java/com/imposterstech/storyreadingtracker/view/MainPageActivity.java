@@ -31,6 +31,7 @@ public class MainPageActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewOptions;
     UserAPI userAPI;
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     SingletonCurrentUser currentUser;

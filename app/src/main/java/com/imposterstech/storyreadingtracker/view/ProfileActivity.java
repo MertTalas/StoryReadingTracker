@@ -42,7 +42,9 @@ public class ProfileActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private Button buttonApply;
 
+
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     UserAPI userAPI;
     AvatarAPI avatarAPI;
