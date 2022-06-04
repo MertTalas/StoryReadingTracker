@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.AvatarOptions;
 import com.imposterstech.storyreadingtracker.Model.Response.AvatarModel;
 import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel;
@@ -35,7 +36,9 @@ public class AvatarActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<AvatarModel> allAvatars;
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     AvatarAPI avatarAPI;
     SingletonCurrentUser currentUser;

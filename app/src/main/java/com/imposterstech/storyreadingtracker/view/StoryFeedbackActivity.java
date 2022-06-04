@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Request.FeedbackRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Request.StoryRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.FeedbackModel;
@@ -37,7 +38,9 @@ public class StoryFeedbackActivity extends AppCompatActivity {
 
     FeedbackAPI feedbackAPI;
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+
     Retrofit retrofit;
     SingletonCurrentUser currentUser;
 
