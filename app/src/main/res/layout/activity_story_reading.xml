@@ -6,53 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".view.StoryReadingActivity">
 
-
-
-    <include
-        android:id="@+id/toolbar_reading_page"
-        layout="@layout/toolbar_reading_story"
-
-        >
-
-
-    </include>
-
     <TextView
         android:id="@+id/textView_story_reading_page_story_text"
-        android:layout_width="325dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/secondary_light"
-        android:ems="10"
+        android:layout_width="384dp"
+        android:layout_height="275dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:padding="10dp"
         android:text="test"
-        android:textSize="25sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_reading_page" />
+        app:layout_constraintTop_toBottomOf="@+id/button_storyReadingStartReading" />
 
     <TextView
         android:id="@+id/textView_story_reading_page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="24dp"
-        android:text="Title"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_story_reading_page_story_text"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_dashboard"
+        android:fontFamily="@font/average_sans"
+        android:text="Story Reading Page"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_reading_page"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <FrameLayout
         android:id="@+id/container_camera"
-        android:layout_width="328dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="32dp"
-        android:background="@color/primary_light"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -60,14 +47,16 @@
         <androidx.camera.view.PreviewView
             android:id="@+id/preview_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <com.imposterstech.storyreadingtracker.FaceTracking.GraphicOverlay
-            android:id="@+id/graphic_overlay"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="@id/preview_view"
-            app:layout_constraintStart_toStartOf="@id/preview_view" />
+            android:visibility="invisible">
+
+            <com.imposterstech.storyreadingtracker.FaceTracking.GraphicOverlay
+                android:id="@+id/graphic_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="@id/preview_view"
+                app:layout_constraintStart_toStartOf="@id/preview_view" />
+        </androidx.camera.view.PreviewView>
 
 
     </FrameLayout>
@@ -77,10 +66,45 @@
         android:id="@+id/button_storyReadingStartReading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="80dp"
-        android:text="Start Reading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_reading_page" />
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:text="Start Readıng"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/ImageButton_toolbar_skip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
 
+    <Button
+        android:id="@+id/ImageButton_toolbar_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:text="Skıp Story"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_storyReadingStartReading"
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
+
+    <Button
+        android:id="@+id/ImageButton_toolbar_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/button_selector"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:onClick="onSlideViewButtonClick"
+        android:text="Show Camera"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/container_camera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_story_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

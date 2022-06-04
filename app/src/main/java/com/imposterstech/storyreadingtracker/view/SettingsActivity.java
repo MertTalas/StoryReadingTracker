@@ -28,13 +28,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         mainPageOptions=new ArrayList<>();
 
-        MainPageOptions changeLanguage=new MainPageOptions("Change Language",R.drawable.ic_settings_change_language);
-        MainPageOptions giveFeedback=new MainPageOptions("Give Feedback",R.drawable.ic_settings_give_feedback);
-        MainPageOptions fontSize=new MainPageOptions("Font Size",R.drawable.ic_settings_font_size);
-        MainPageOptions about=new MainPageOptions("About",R.drawable.ic_settings_about);
-        MainPageOptions logout=new MainPageOptions("Logout",R.drawable.ic_settings_logout);
+        MainPageOptions changeLanguage=new MainPageOptions("Change Language",R.drawable.ic_settings_change_language,"You can change the language of the\napplication as you wish");
+        MainPageOptions fontSize=new MainPageOptions("Font Size",R.drawable.ic_settings_font_size,"you can change the font size\nof the application");
+        MainPageOptions about=new MainPageOptions("About",R.drawable.ic_settings_about,"You can learn more about\nthe application");
+        MainPageOptions logout=new MainPageOptions("Logout",R.drawable.ic_settings_logout,"You can safely exit the application");
         mainPageOptions.add(changeLanguage);
-        mainPageOptions.add(giveFeedback);
         mainPageOptions.add(fontSize);
         mainPageOptions.add(about);
         mainPageOptions.add(logout);

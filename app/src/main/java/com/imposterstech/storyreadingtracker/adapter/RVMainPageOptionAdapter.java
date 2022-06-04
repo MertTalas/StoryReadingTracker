@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
     @Override
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
         holder.textViewOptionName.setText(options.get(position).getName());
+        holder.textViewOptionDesc.setText(options.get(position).getDescription());
         holder.textViewOptionImage.setImageResource(options.get(position).getImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,28 +52,43 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
                 //Toast.makeText(view.getContext(),options.get(position).getName(),Toast.LENGTH_LONG).show();
 
                 if(options.get(position).getName().equals("Read Story")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
                     Intent to_readstory_intent=new Intent(holder.itemView.getContext(), StoryReadingActivity.class);
                     holder.itemView.getContext().startActivity(to_readstory_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                 }
                 if(options.get(position).getName().equals("Settings")){
-                    Intent to_readstory_intent=new Intent(holder.itemView.getContext(), SettingsActivity.class);
-                    holder.itemView.getContext().startActivity(to_readstory_intent);
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    Intent to_settings_intent=new Intent(holder.itemView.getContext(), SettingsActivity.class);
+                    holder.itemView.getContext().startActivity(to_settings_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                 }
                 if(options.get(position).getName().equals("Past Readings")){
-                    Intent to_readstory_intent=new Intent(holder.itemView.getContext(), PastReadingActivity.class);
-                    holder.itemView.getContext().startActivity(to_readstory_intent);
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    Intent to_pastreadings_intent=new Intent(holder.itemView.getContext(), PastReadingActivity.class);
+                    holder.itemView.getContext().startActivity(to_pastreadings_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                 }
                 if(options.get(position).getName().equals("Profile")){
-                    Intent to_readstory_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
-                    holder.itemView.getContext().startActivity(to_readstory_intent);
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    Intent to_profile_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
+                    holder.itemView.getContext().startActivity(to_profile_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                 }
                 if(options.get(position).getName().equals("Ranking")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
                     Intent to_ranking_intent=new Intent(holder.itemView.getContext(), RankingActivity.class);
                     holder.itemView.getContext().startActivity(to_ranking_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                 }
 
@@ -93,7 +111,7 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
 
     public class OptionHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewOptionName;
+        public TextView textViewOptionName, textViewOptionDesc;
         public ImageView textViewOptionImage;
 
         public OptionHolder(@NonNull View itemView) {
@@ -101,7 +119,7 @@ public class RVMainPageOptionAdapter extends RecyclerView.Adapter<RVMainPageOpti
 
             textViewOptionName=(TextView)itemView.findViewById(R.id.main_page_rv_textview_name);
             textViewOptionImage=(ImageView)itemView.findViewById(R.id.main_page_rv_imageview_name);
-
+            textViewOptionDesc=(TextView)itemView.findViewById(R.id.main_page_rv_textview_desc);
         }
     }
 

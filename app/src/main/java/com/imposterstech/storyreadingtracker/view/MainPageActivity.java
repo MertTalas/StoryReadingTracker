@@ -74,11 +74,11 @@ public class MainPageActivity extends AppCompatActivity {
     public void setAdapter(){
         mainPageOptions=new ArrayList<>();
 
-        MainPageOptions readStory=new MainPageOptions("Read Story",R.drawable.ic_main_read_story_option);
-        MainPageOptions pastReadings=new MainPageOptions("Past Readings",R.drawable.ic_main_past_readings_option);
-        MainPageOptions profile=new MainPageOptions("Profile",R.drawable.ic_main_profile_option);
-        MainPageOptions ranking=new MainPageOptions("Ranking",R.drawable.ic_main_ranking_option);
-        MainPageOptions settings=new MainPageOptions("Settings",R.drawable.ic_main_settings_option);
+        MainPageOptions readStory=new MainPageOptions("Read Story",R.drawable.ic_main_read_story_option,"You can read a few stories and improve\nyour reading ability");
+        MainPageOptions pastReadings=new MainPageOptions("Past Readings",R.drawable.ic_main_past_readings_option, "You can review the stories you\nhave already read");
+        MainPageOptions profile=new MainPageOptions("Profile",R.drawable.ic_main_profile_option, "You can view your profile and\nupdate your information");
+        MainPageOptions ranking=new MainPageOptions("Ranking",R.drawable.ic_main_ranking_option, "You can see your rank and score");
+        MainPageOptions settings=new MainPageOptions("Settings",R.drawable.ic_main_settings_option, "You can make changes on app and\nsee settings");
         mainPageOptions.add(readStory);
         mainPageOptions.add(pastReadings);
         mainPageOptions.add(profile);

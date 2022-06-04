@@ -5,8 +5,8 @@
     <color name="error">#B00020</color>
     <color name="success">#A0E16C</color>
     <color name="primary">#fff59d</color>
-    <color name="primary_light">#ffffcf</color>
-    <color name="primary_dark">#cbc26d</color>
+    <color name="primary_light">#ffd77d</color>
+    <color name="primary_dark">#bc771e</color>
     <color name="secondary">#90caf9</color>
     <color name="secondary_light">#c3fdff</color>
     <color name="secondary_dark">#5d99c6</color>

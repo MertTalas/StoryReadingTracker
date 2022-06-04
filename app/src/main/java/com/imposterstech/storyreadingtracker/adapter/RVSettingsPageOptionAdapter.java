@@ -46,6 +46,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
 
         holder.textViewOptionName.setText(options.get(position).getName());
+        holder.textViewOptionDesc.setText(options.get(position).getDescription());
         holder.textViewOptionImage.setImageResource(options.get(position).getImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +126,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
     public class OptionHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewOptionName;
+        public TextView textViewOptionName, textViewOptionDesc;
         public ImageView textViewOptionImage;
 
         public OptionHolder(@NonNull View itemView) {
@@ -133,7 +134,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
             textViewOptionName=(TextView)itemView.findViewById(R.id.main_page_rv_textview_name);
             textViewOptionImage=(ImageView)itemView.findViewById(R.id.main_page_rv_imageview_name);
-
+            textViewOptionDesc=(TextView)itemView.findViewById(R.id.main_page_rv_textview_desc);
         }
     }
 
