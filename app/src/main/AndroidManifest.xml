@@ -14,14 +14,21 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.AboutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".view.RankingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.AdminFeedbackCheckActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.StoryFeedbackActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.ChangePasswordActivity"
             android:exported="false"
@@ -52,7 +59,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.AvatarActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.AdminMainPageActivity"
             android:exported="false"
