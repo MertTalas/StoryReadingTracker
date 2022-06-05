@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     Retrofit retrofit;
     private String token;
 
-    public static final Integer RECORD_AUDIO_REQUEST_CODE = 1;
-    private static final String[] RECORD_AUDIO = new String[]{Manifest.permission.RECORD_AUDIO};
+
+
 
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
     private static final String[] RECORD_AUDIO = new String[]{Manifest.permission.RECORD_AUDIO};

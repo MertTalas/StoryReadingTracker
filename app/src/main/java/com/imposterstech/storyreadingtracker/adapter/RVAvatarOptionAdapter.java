@@ -198,9 +198,10 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
                                 @Override
                                 public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {
                                     if (response.isSuccessful()) {
-                                        allAvatars.add(allAvatars.get(position));
+                                       // allAvatars.add(allAvatars.get(position));
                                         Toast.makeText(view.getContext(), "Avatar bought!!", Toast.LENGTH_LONG).show();
                                         holder.imageViewAvatarLock.setImageResource(0);
+                                        holder.isBought=true;
                                         currentUser.getLoggedUser().setPoints(currentUser.getLoggedUser().getPoints() - avatarRequestModel.getAvatarPrice());
                                     } else {
                                         try {
