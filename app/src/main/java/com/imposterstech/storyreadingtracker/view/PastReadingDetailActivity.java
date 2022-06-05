@@ -5,8 +5,12 @@ import androidx.camera.core.Preview;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
@@ -64,7 +68,9 @@ public class PastReadingDetailActivity extends AppCompatActivity {
         init();
 
 
+
     }
+
 
 
     public void init(){
@@ -139,6 +145,7 @@ public class PastReadingDetailActivity extends AppCompatActivity {
                         graphicOverlay.add(new NonFaceGraphic(graphicOverlay, contour));
 
                     }
+
                 }
             }
 
