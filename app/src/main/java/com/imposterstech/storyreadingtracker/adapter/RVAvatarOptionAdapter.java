@@ -87,7 +87,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
 
         holder.textViewAvatarName.setText(allAvatars.get(position).getAvatarName());
         holder.textViewAvatarPrice.setText("Avatar Price: "+String.valueOf(allAvatars.get(position).getAvatarPrice()));
-
+        AvatarModel avatartempModel;
         Call<List<AvatarModel>> call=avatarAPI.getUserAvatars(currentUser.getToken());
         call.enqueue(new Callback<List<AvatarModel>>() {
             @Override
@@ -198,10 +198,12 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
                                 @Override
                                 public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {
                                     if (response.isSuccessful()) {
-                                        allAvatars.add(allAvatars.get(position));
+                                        //allAvatars.add(allAvatars.get(position));
                                         Toast.makeText(view.getContext(), "Avatar bought!!", Toast.LENGTH_LONG).show();
                                         holder.imageViewAvatarLock.setImageResource(0);
                                         currentUser.getLoggedUser().setPoints(currentUser.getLoggedUser().getPoints() - avatarRequestModel.getAvatarPrice());
+
+                                        notifyItemChanged(position);
                                     } else {
                                         try {
                                             JSONObject jObjError = new JSONObject(response.errorBody().string());
