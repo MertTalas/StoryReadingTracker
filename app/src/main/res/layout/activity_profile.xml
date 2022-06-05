@@ -7,121 +7,234 @@
     tools:context=".view.ProfileActivity"
     android:background="@color/surface">
 
+    <TextView
+        android:id="@+id/textViewProfile"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_dashboard"
+        android:fontFamily="@font/average_sans"
+        android:text="Profile"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/imageButtonPersonPP"
-        android:layout_width="89dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile"
         tools:ignore="SpeakableTextPresentCheck"
         tools:srcCompat="@drawable/ic_main_profile_option" />
 
     <TextView
         android:id="@+id/textView_SelectAvatar"
-        android:layout_width="108dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/open_sans"
         android:text="Select Avatar"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextUsername"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonPersonPP" />
+
+    <TextView
+        android:id="@+id/textView_ProfilePage_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Useremail@mail.com"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonPersonPP"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile" />
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Age"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextLastName" />
+
+    <EditText
+        android:id="@+id/editText_ProfilePage_age"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:text="Age"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_profilePage_age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAge" />
+
+    <Spinner
+        android:id="@+id/spinner_profilePage_age"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/blue_outline"
+        android:contentDescription="Age"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:popupBackground="@drawable/button_selector"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText_ProfilePage_age"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAge" />
+
+
+    <TextView
+        android:id="@+id/textView_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="29dp"
+        android:fontFamily="@font/open_sans"
+        android:text="First Name"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextUsername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonPersonPP" />
 
     <EditText
-        android:id="@+id/editTextTextBirthday"
-        android:layout_width="221dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:inputType="number|textPersonName"
-        android:text="Age"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
         android:id="@+id/editTextTextUsername"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="100dp"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
         android:inputType="textPersonName"
-        android:text="FirstName"
+        android:padding="10dp"
+        android:text="First Name"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.769"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_SelectAvatar" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_firstname" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="195dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="100dp"
-        android:text="Select Gender"
-        android:textAlignment="center"
-        android:textSize="24sp"
+        android:id="@+id/textViewGender"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Gender"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextBirthday" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_profilePage_age" />
 
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="180dp"
-        android:layout_height="112dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/profile_button_apply"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/editText_ProfilePage_gender"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:text="Gender"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_profilePage_gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
-        <RadioButton
-            android:id="@+id/radioButton_male"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/radioButton_female"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:text="Female" />
-    </RadioGroup>
+    <Spinner
+        android:id="@+id/spinner_profilePage_gender"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/blue_outline"
+        android:contentDescription="Age"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:popupBackground="@drawable/button_selector"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText_ProfilePage_gender"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGender" />
 
     <Button
         android:id="@+id/profile_button_apply"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_action"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:text="Update"
+        android:textColor="@color/background"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_profilePage_gender" />
+
+    <TextView
+        android:id="@+id/textView_lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="Apply"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Last Name"
+        android:textColor="@color/on_primary"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername" />
 
     <EditText
         android:id="@+id/editTextTextLastName"
-        android:layout_width="228dp"
-        android:layout_height="49dp"
-        android:ems="10"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
         android:inputType="textPersonName"
-        android:text="LastName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextBirthday"
+        android:padding="10dp"
+        android:text="Last Name"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_lastname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
