@@ -16,6 +16,8 @@ import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.List;
 
 import retrofit2.Call;
@@ -77,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
         spinnerGender=findViewById(R.id.spinner_profilePage_gender);
 
 
+
         Gson gson=new GsonBuilder().setLenient().create();
         currentUser=SingletonCurrentUser.getInstance();
 
@@ -90,6 +94,17 @@ public class ProfileActivity extends AppCompatActivity {
         UserModel userModel = currentUser.getLoggedUser();
 
         textViewEmail.setText(userModel.getEmail());
+        Resources res = getApplicationContext().getResources();
+
+        String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
+        String fnm = avatarArraySplit[0]; //  this is image file name
+        String PACKAGE_NAME = getApplicationContext().getPackageName();
+        int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+        imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+
+
+
+
         editTextUsername.setText(userModel.getFirstName());
         editTextLastName.setText(userModel.getLastName());
         editTextAge.setText(String.valueOf(userModel.getAge()));
@@ -167,7 +182,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent to_avatar_page=new Intent(ProfileActivity.this, AvatarActivity.class);
                 startActivity(to_avatar_page);
-                // finish();
+                finish();
 
 
             }

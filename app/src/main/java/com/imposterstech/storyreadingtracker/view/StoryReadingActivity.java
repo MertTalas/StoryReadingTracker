@@ -12,7 +12,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -20,6 +29,7 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -115,6 +125,152 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
 
+
+    TextView textViewSpeechText;
+    int count = 0;
+    SpeechRecognizer speechRecognizer;
+    String sentenceControl="";
+    int wordCounter=0;
+    int charCounter = 0;
+    ArrayList<String> words;
+    Intent speechRecognizerIntent;
+
+    private void speechRecognizer(){
+
+
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
+        speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS,60000);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS,60000);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+
+        SpannableString SS = new SpannableString(textViewStoryText.getText().toString());
+        ForegroundColorSpan fcsGreen = new ForegroundColorSpan(Color.GREEN);
+        ForegroundColorSpan fcsRed = new ForegroundColorSpan(Color.RED);
+        //setWords(words);
+
+
+
+
+
+        textViewSpeechText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if(charSequence.length()<i2){
+                    return;
+                }
+                if((wordCounter+2)>words.size()){
+                    return;
+                }
+                String remainingSentence = String.valueOf(charSequence.subSequence(i1, i2));
+                if (!remainingSentence.equals("")) {
+                    if (remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+1;
+
+                    } if(remainingSentence.replaceAll("[^a-zA-Z]+", "").equals((words.get(wordCounter)+words.get(wordCounter+1)).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+words.get(wordCounter+1).length()+2;
+                        wordCounter++;
+
+                    }
+                    else if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                        SS.setSpan(fcsRed, charCounter, charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textViewStoryText.setText(SS);
+                        charCounter+=words.get(wordCounter).length()+1;
+                        //wordCounter--;
+
+                    }
+                    wordCounter++;
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
+
+
+
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                buttonStartReading.performClick();
+            }
+
+            @Override
+            public void onError(int i) {
+
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+                ArrayList<String> data = bundle.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
+                if (!sentenceControl.equals(data.get(0))) {
+                    textViewSpeechText.setText(data.get(0));
+                    sentenceControl = data.get(0);
+
+                }
+            }
+
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
+            }
+        });
+
+
+
+    }
+
+    public void setWords(ArrayList words){
+        String [] allWords = textViewStoryText.getText().toString().split(" ");
+        for(String word: allWords ){
+            words.add(word);
+
+        }
+
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,10 +280,13 @@ public class StoryReadingActivity extends AppCompatActivity {
         cameraSelector = new CameraSelector.Builder().requireLensFacing(lensFacing).build();
 
         setContentView(R.layout.activity_story_reading);
+       // setTextSize();
+
         isStarted=false;
         init();
         graphicOverlay = findViewById(R.id.graphic_overlay);
         isHide = false;
+
 
 
 
@@ -155,7 +314,9 @@ public class StoryReadingActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(!isStarted){
-
+                    //speechrecogn
+                    speechRecognizer();
+                    speechRecognizer.startListening(speechRecognizerIntent);
 
                     faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
                     Call<FaceExperienceModel> call=faceExperienceAPI.createReading(currentUser.getToken(),storyModel.getStoryId());
@@ -231,6 +392,10 @@ public class StoryReadingActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    //spechrecogni
+                    speechRecognizer.stopListening();
+
+
                     buttonStartReading.setText("Start Readıng");
                     isStarted=false;
                     imageProcessor.stop();
@@ -347,7 +512,8 @@ public class StoryReadingActivity extends AppCompatActivity {
 
     public void init() {
         isStarted = false;//to store started or not
-
+        words = new ArrayList<>();
+        textViewSpeechText=findViewById(R.id.textView_storyreading_hiden);
         textViewStoryText = findViewById(R.id.textView_story_reading_page_story_text);
         textViewTitle = findViewById(R.id.textView_story_reading_page_title);
         imageButtonCamera = findViewById(R.id.ImageButton_toolbar_camera);
@@ -367,7 +533,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                     new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
             String line = in.readLine();
             textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
-            ;
+
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -447,6 +613,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
                     textViewStoryText.setText(response.body().getStoryText());
                     textViewTitle.setText(response.body().getTitle());
+                    setWords(words);
                 } else {
                     Toast.makeText(getApplicationContext(), "Something is wrong restart app.", Toast.LENGTH_LONG).show();
                 }

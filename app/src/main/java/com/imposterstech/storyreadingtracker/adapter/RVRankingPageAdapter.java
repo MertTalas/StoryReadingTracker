@@ -58,6 +58,8 @@ public class RVRankingPageAdapter extends RecyclerView.Adapter<RVRankingPageAdap
             Resources res = holder.itemView.getContext().getResources();
 
             String fnm = allUsers.get(position).getChosenAvatarUrl(); //  this is image file name
+            String [] avatarArraySplit=fnm.split("\\.");
+            fnm = avatarArraySplit[0]; //  this is image file name
             String PACKAGE_NAME = context.getPackageName();
             int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
             holder.imageViewAvatar.setImageBitmap(BitmapFactory.decodeResource(res,imgId));

@@ -122,4 +122,15 @@
         app:layout_constraintBottom_toTopOf="@+id/container_camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_story_text" />
+
+    <TextView
+        android:id="@+id/textView_storyreading_hiden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_story_reading_page_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

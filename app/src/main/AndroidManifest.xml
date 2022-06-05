@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Declare features -->
     <uses-feature android:name="android.hardware.camera" /> <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,9 @@
             android:name=".view.RankingActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.CameraRevizualize"
+            android:exported="false" />
         <activity
             android:name=".view.AdminFeedbackCheckActivity"
             android:exported="false"

@@ -5,9 +5,16 @@ import androidx.camera.core.Preview;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PointF;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -40,11 +47,11 @@ public class PastReadingDetailActivity extends AppCompatActivity {
     SingletonCurrentReadedStory singletonCurrentReadedStory;
     SimpleStoryUserModel simpleStoryUserModel;
     private GraphicOverlay graphicOverlay;
+    private View preview;
 
 
 
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
-
     Retrofit retrofit;
     FaceExperienceAPI faceExperienceAPI;
     SingletonCurrentUser currentUser;
@@ -61,7 +68,10 @@ public class PastReadingDetailActivity extends AppCompatActivity {
         init();
 
 
+
     }
+
+
 
     public void init(){
 
@@ -76,7 +86,7 @@ public class PastReadingDetailActivity extends AppCompatActivity {
         faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
 
 
-
+        preview=findViewById(R.id.preview_view_past_reading);
         textViewTitle=findViewById(R.id.textView_reading_detail_page_title);
         textViewReadOnDate=findViewById(R.id.textView_reading_detail_page_readon_date);
         singletonCurrentReadedStory=SingletonCurrentReadedStory.getInstance();
@@ -112,22 +122,30 @@ public class PastReadingDetailActivity extends AppCompatActivity {
 
 
 
+        // graphicOverlay.setImageSourceInfo(
+        //          200, 200, false);
 
-        graphicOverlay.setImageSourceInfo(
-                200, 200, false);
 
+        preview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent to_camera_revizualize = new Intent(PastReadingDetailActivity.this,CameraRevizualize.class);
+                startActivity(to_camera_revizualize);
+                //finish();
+            }
+        });
         Call<List<Contour>> call=faceExperienceAPI.getAllContour(currentUser.getToken(),singletonCurrentReadedStory.getSimpleStoryUserModel().getFaceExperienceDocumentId() );
 
         call.enqueue(new Callback<List<Contour>>() {
             @Override
             public void onResponse(Call<List<Contour>> call, Response<List<Contour>> response) {
                 if(response.isSuccessful()){
+
                     for(Contour contour: response.body()){
-
-
                         graphicOverlay.add(new NonFaceGraphic(graphicOverlay, contour));
 
                     }
+
                 }
             }
 
