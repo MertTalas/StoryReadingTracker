@@ -16,6 +16,8 @@ import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         buttonApply=findViewById(R.id.profile_button_apply);
 
 
+
         Gson gson=new GsonBuilder().setLenient().create();
         currentUser=SingletonCurrentUser.getInstance();
 
@@ -78,6 +82,17 @@ public class ProfileActivity extends AppCompatActivity {
         userAPI=retrofit.create(UserAPI.class);
         SingletonCurrentUser currentUser = SingletonCurrentUser.getInstance();
         UserModel userModel = currentUser.getLoggedUser();
+
+        Resources res = getApplicationContext().getResources();
+
+        String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
+        String fnm = avatarArraySplit[0]; //  this is image file name
+        String PACKAGE_NAME = getApplicationContext().getPackageName();
+        int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+        imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+
+
+
 
         editTextUsername.setText(userModel.getFirstName());
         editTextBirthday.setText(String.valueOf(userModel.getAge()));
@@ -133,7 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent to_avatar_page=new Intent(ProfileActivity.this, AvatarActivity.class);
                 startActivity(to_avatar_page);
-                // finish();
+                finish();
 
 
             }
