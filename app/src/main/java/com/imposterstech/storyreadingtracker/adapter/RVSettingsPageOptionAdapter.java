@@ -7,6 +7,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -19,7 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.view.AboutActivity;
+import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
+import com.imposterstech.storyreadingtracker.view.ProfileActivity;
+import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryFeedbackActivity;
+import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -53,8 +60,34 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),options.get(position).getName(),Toast.LENGTH_LONG).show();
 
-                if(options.get(position).getName().equals("Font Size")){
+                if(options.get(position).getName().equals("Change Language")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    /*Intent to_changelanguage_intent=new Intent(holder.itemView.getContext(), SettingsActivity.class);
+                    holder.itemView.getContext().startActivity(to_changelanguage_intent);*/
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
+                }
+                if(options.get(position).getName().equals("About")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    Intent to_about_intent=new Intent(holder.itemView.getContext(), AboutActivity.class);
+                    holder.itemView.getContext().startActivity(to_about_intent);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
+
+                }
+                if(options.get(position).getName().equals("Logout")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    /*Intent to_profile_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
+                    holder.itemView.getContext().startActivity(to_profile_intent);*/
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
+
+                }
+                if(options.get(position).getName().equals("Font Size")){
+                    Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
+                    holder.itemView.setVisibility(view.VISIBLE);
+                    holder.itemView.startAnimation(animation);
 
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                     View viewAlert = inflater.inflate( R.layout.av_set_font_size, null );
@@ -65,25 +98,18 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     ad.setView(viewAlert);
                     ad.setNegativeButton("Cancel",null);
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                             editTextFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i);
-
                             textsizeUnit=i;
-
                         }
 
                         @Override
                         public void onStartTrackingTouch(SeekBar seekBar) {
-
-
                         }
 
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {
-
                         }
                     });
                     ad.setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -94,27 +120,13 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                                 OutputStreamWriter writer = new OutputStreamWriter(fos);
                                 writer.write(Integer.toString(textsizeUnit));
                                 writer.close();
-
                             }catch(Exception e){
                                 e.printStackTrace();
                             }
-
-
                         }
                     });
                     ad.create().show();
-
-
-
-
-
                 }
-                if(options.get(position).getName().equals("Give Feedback")){
-                   // Intent to_give_feedback=new Intent(holder.itemView.getContext(), StoryFeedbackActivity.class);
-                   // holder.itemView.getContext().startActivity(to_give_feedback);
-
-                }
-
             }
         });
     }

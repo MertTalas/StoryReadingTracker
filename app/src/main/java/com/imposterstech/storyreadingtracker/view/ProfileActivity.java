@@ -21,13 +21,17 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.lang.reflect.Array;
 import java.util.List;
 
@@ -40,10 +44,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton imageButtonUserPP;
-    private EditText editTextUsername,editTextBirthday;
-    private RadioButton radioButton;
-    private RadioGroup radioGroup;
+    private EditText editTextUsername, editTextLastName, editTextAge, editTextGender;
     private Button buttonApply;
+    private TextView textViewEmail;
+    ArrayAdapter ageArrayAdapter;
+    ArrayAdapter genderArrayAdapter;
+    private Spinner spinnerAge,spinnerGender;
 
 
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
@@ -64,10 +70,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
     void init(){
         imageButtonUserPP=findViewById(R.id.imageButtonPersonPP);
-        editTextBirthday=findViewById(R.id.editTextTextBirthday);
         editTextUsername=findViewById(R.id.editTextTextUsername);
-        radioGroup=findViewById(R.id.radio_group);
+        editTextLastName=findViewById(R.id.editTextTextLastName);
+        editTextAge=findViewById(R.id.editText_ProfilePage_age);
+        textViewEmail=findViewById(R.id.textView_ProfilePage_email);
+        editTextGender=findViewById(R.id.editText_ProfilePage_gender);
         buttonApply=findViewById(R.id.profile_button_apply);
+        spinnerAge=findViewById(R.id.spinner_profilePage_age);
+        spinnerGender=findViewById(R.id.spinner_profilePage_gender);
 
 
 
@@ -83,24 +93,54 @@ public class ProfileActivity extends AppCompatActivity {
         SingletonCurrentUser currentUser = SingletonCurrentUser.getInstance();
         UserModel userModel = currentUser.getLoggedUser();
 
+        textViewEmail.setText(userModel.getEmail());
         Resources res = getApplicationContext().getResources();
 
-        String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
-        String fnm = avatarArraySplit[0]; //  this is image file name
-        String PACKAGE_NAME = getApplicationContext().getPackageName();
-        int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
-        imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+        if(currentUser.getLoggedUser().getChosenAvatarUrl()!=null){
+            String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
+            String fnm = avatarArraySplit[0]; //  this is image file name
+            String PACKAGE_NAME = getApplicationContext().getPackageName();
+            int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+        }
+
 
 
 
 
         editTextUsername.setText(userModel.getFirstName());
-        editTextBirthday.setText(String.valueOf(userModel.getAge()));
-        String gender = userModel.getGender();
-        if(gender.equals("Female"))
-            radioGroup.check(R.id.radioButton_female);
-        else
-            radioGroup.check(R.id.radioButton_male);
+        editTextLastName.setText(userModel.getLastName());
+        editTextAge.setText(String.valueOf(userModel.getAge()));
+        editTextGender.setText(userModel.getGender());
+
+        int positionGender=0;
+        int gender=0;
+        String[] genders={"Male","Female"};
+        for(int i=0;i<genders.length;i++){
+            if((String.valueOf(editTextGender.getText()).equals(genders[i]))){
+                positionGender=gender;
+            }
+            gender++;
+        }
+        genderArrayAdapter=new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,genders);
+
+        int positionAge=0;
+        int age=0;
+        ArrayList ages=new ArrayList();
+        for(int i=7;i<45;i++){
+            if(Integer.parseInt(String.valueOf(editTextAge.getText()))==i){
+                positionAge=age;
+            }
+            ages.add(i);
+            age++;
+        }
+        ageArrayAdapter=new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,ages);
+
+        spinnerAge.setAdapter(ageArrayAdapter);
+        spinnerGender.setAdapter(genderArrayAdapter);
+
+        spinnerAge.setSelection(positionAge);
+        spinnerGender.setSelection(positionGender);
 
         Intent to_main_page=new Intent(this, MainPageActivity.class);
 
@@ -108,14 +148,11 @@ public class ProfileActivity extends AppCompatActivity {
         buttonApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton=findViewById(radioId);
-
                 UpdateUserRequestModel updateUserRequestModel =new UpdateUserRequestModel();
-                updateUserRequestModel.setAge(Integer.parseInt(editTextBirthday.getText().toString()));
                 updateUserRequestModel.setFirstName(editTextUsername.getText().toString());
-                updateUserRequestModel.setGender(radioButton.getText().toString());
                 updateUserRequestModel.setLastName(currentUser.getLoggedUser().getLastName());
+                updateUserRequestModel.setGender(spinnerGender.getSelectedItem().toString());
+                updateUserRequestModel.setAge(Integer.parseInt(spinnerAge.getSelectedItem().toString()));
 
 
                 Call<UserModel> call = userAPI.updateUser(currentUser.getToken(),updateUserRequestModel);

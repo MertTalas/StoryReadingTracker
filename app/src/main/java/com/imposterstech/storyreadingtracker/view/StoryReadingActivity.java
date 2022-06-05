@@ -280,7 +280,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         cameraSelector = new CameraSelector.Builder().requireLensFacing(lensFacing).build();
 
         setContentView(R.layout.activity_story_reading);
-       // setTextSize();
+        setTextSize();
 
         isStarted=false;
         init();
