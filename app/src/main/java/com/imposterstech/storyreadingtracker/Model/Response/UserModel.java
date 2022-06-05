@@ -20,7 +20,7 @@ public class UserModel {
     @SerializedName("termsAndPoliciesAccepted")
     private boolean termsAndPoliciesAccepted;
     @SerializedName("chosenAvatarUrl")
-    private String chosenAvatarUrl;
+    private String chosenAvatarUrl="avatar1";
 
 
     public String getUserId() {

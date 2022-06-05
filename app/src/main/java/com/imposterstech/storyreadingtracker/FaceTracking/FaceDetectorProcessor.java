@@ -17,6 +17,7 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.google.mlkit.vision.face.FaceLandmark;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Contour;
 import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentStoryReading;
@@ -40,7 +41,7 @@ public class FaceDetectorProcessor  extends VisionProcessorBase<List<Face>> {
     SingletonCurrentStoryReading singletonCurrentStoryReading;
 
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     FaceExperienceAPI faceExperienceAPI;
 
@@ -139,7 +140,6 @@ public class FaceDetectorProcessor  extends VisionProcessorBase<List<Face>> {
                 Log.e("facepoint","fail kayıt ");
             }
         });
-
 
 
     }

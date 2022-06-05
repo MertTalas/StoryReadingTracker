@@ -2,7 +2,7 @@ package com.imposterstech.storyreadingtracker;
 
 public enum BASEURL {
 
-    BASE_URL("http://192.168.1.109:8080/story-app-ws/");
+    BASE_URL("http://192.168.1.42:8080/story-app-ws/");
     private String base_URL;
 
     BASEURL(String base_URL) {

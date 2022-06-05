@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface AvatarAPI {
 
@@ -20,4 +21,13 @@ public interface AvatarAPI {
 
     @GET("avatars/allAvatars")
     Call<List<AvatarModel>> getAllAvatars(@Header("Authorization") String authorization);
+
+    @GET("avatars/userAvatars")
+    Call<List<AvatarModel>> getUserAvatars(@Header("Authorization") String authorization);
+
+    @PUT("avatars/selectAvatar")
+    Call<AvatarModel> selectAvatar(@Body AvatarRequestModel avatarRequestModel, @Header("Authorization") String authorization);
+
+
+
 }
