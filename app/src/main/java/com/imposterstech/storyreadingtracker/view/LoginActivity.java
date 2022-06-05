@@ -55,7 +55,9 @@ public class LoginActivity extends AppCompatActivity {
     private String token;
 
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
+    private static final String[] RECORD_AUDIO = new String[]{Manifest.permission.RECORD_AUDIO};
     private static final int CAMERA_REQUEST_CODE = 10;
+    public static final Integer RECORD_AUDIO_REQUEST_CODE = 1;
 
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin,buttonRegister;
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         init();
         checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
+        checkPermission(Manifest.permission.RECORD_AUDIO,RECORD_AUDIO_REQUEST_CODE);
 
         //Retrofit & JSON
 
@@ -161,6 +164,15 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Camera Permission Denied", Toast.LENGTH_SHORT) .show();
             }
         }
+        if(requestCode==RECORD_AUDIO_REQUEST_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(LoginActivity.this, "Record audio Permission Granted", Toast.LENGTH_SHORT) .show();
+            }
+            else {
+                Toast.makeText(LoginActivity.this, "Record audio Permission Denied", Toast.LENGTH_SHORT) .show();
+            }
+        }
+
        /* else if (requestCode == STORAGE_PERMISSION_CODE) {     //later for microphone perm  //TODO
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
