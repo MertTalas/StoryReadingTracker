@@ -134,7 +134,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                 holder.selectedAvatar=currentUser.getLoggedUser().getChosenAvatarUrl();
-                if(holder.isBought&&!holder.selectedAvatar.equals(allAvatars.get(position).getAvatarURL())){
+                if(holder.isBought){
                     View viewAlert = inflater.inflate( R.layout.av_select_avatar, null );
 
                     ImageView imageView =viewAlert.findViewById(R.id.imageView_buy_avatar_image);

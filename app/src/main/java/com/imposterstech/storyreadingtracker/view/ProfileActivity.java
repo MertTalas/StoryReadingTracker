@@ -96,11 +96,14 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail.setText(userModel.getEmail());
         Resources res = getApplicationContext().getResources();
 
-        String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
-        String fnm = avatarArraySplit[0]; //  this is image file name
-        String PACKAGE_NAME = getApplicationContext().getPackageName();
-        int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
-        imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+        if(currentUser.getLoggedUser().getChosenAvatarUrl()!=null){
+            String [] avatarArraySplit=currentUser.getLoggedUser().getChosenAvatarUrl().split("\\.");
+            String fnm = avatarArraySplit[0]; //  this is image file name
+            String PACKAGE_NAME = getApplicationContext().getPackageName();
+            int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            imageButtonUserPP.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
+        }
+
 
 
 
