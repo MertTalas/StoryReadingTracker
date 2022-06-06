@@ -27,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans"
         android:text="Amount of coins you have:"
         android:textColor="@color/on_primary"
         android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_SelectAvatar" />
 
@@ -40,11 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans"
         android:text="Amount"
         android:textColor="@color/on_primary"
         android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_avatar"
         app:layout_constraintStart_toEndOf="@+id/textView_avatar_user_coin"
         app:layout_constraintTop_toBottomOf="@+id/textView_SelectAvatar" />
 

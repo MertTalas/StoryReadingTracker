@@ -91,16 +91,16 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                     View viewAlert = inflater.inflate( R.layout.av_set_font_size, null );
-                    EditText editTextFontSizeTemplate= viewAlert.findViewById(R.id.editTextTextTemplate);
+                    TextView textViewFontSizeTemplate= viewAlert.findViewById(R.id.textViewTemplate);
                     SeekBar seekBar =viewAlert.findViewById(R.id.seekBar);
                     AlertDialog.Builder ad = new AlertDialog.Builder(context);
-                    textsizeUnit=Integer.valueOf((int) editTextFontSizeTemplate.getTextSize());
+                    textsizeUnit=Integer.valueOf((int) textViewFontSizeTemplate.getTextSize());
                     ad.setView(viewAlert);
                     ad.setNegativeButton("Cancel",null);
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            editTextFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i);
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i);
                             textsizeUnit=i;
                         }
 
