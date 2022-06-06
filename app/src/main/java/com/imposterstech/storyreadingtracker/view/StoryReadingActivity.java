@@ -280,7 +280,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         cameraSelector = new CameraSelector.Builder().requireLensFacing(lensFacing).build();
 
         setContentView(R.layout.activity_story_reading);
-       // setTextSize();
+
 
         isStarted=false;
         init();
@@ -308,6 +308,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                 .build();
 
         getRandomStory();
+        setTextSize();
 
         buttonStartReading.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -532,7 +533,10 @@ public class StoryReadingActivity extends AppCompatActivity {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
             String line = in.readLine();
-            textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
+            if(line!=null){
+                textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
+            }
+
 
             in.close();
         } catch (IOException e) {
