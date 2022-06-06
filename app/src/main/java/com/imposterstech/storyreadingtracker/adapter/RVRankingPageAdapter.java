@@ -38,7 +38,12 @@ public class RVRankingPageAdapter extends RecyclerView.Adapter<RVRankingPageAdap
     @Override
     public OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_ranking_row, parent, false);
+        View itemView;
+        if (viewType == 1) {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_ranking_first_row, parent, false);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_ranking_row, parent, false);
+        }
         return new RVRankingPageAdapter.OptionHolder(itemView);
     }
 
@@ -65,6 +70,12 @@ public class RVRankingPageAdapter extends RecyclerView.Adapter<RVRankingPageAdap
             holder.imageViewAvatar.setImageBitmap(BitmapFactory.decodeResource(res,imgId));
         }
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) return 1;
+        else return 2;
     }
 
     @Override

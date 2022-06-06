@@ -150,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 UpdateUserRequestModel updateUserRequestModel =new UpdateUserRequestModel();
                 updateUserRequestModel.setFirstName(editTextUsername.getText().toString());
-                updateUserRequestModel.setLastName(currentUser.getLoggedUser().getLastName());
+                updateUserRequestModel.setLastName(editTextLastName.getText().toString());
                 updateUserRequestModel.setGender(spinnerGender.getSelectedItem().toString());
                 updateUserRequestModel.setAge(Integer.parseInt(spinnerAge.getSelectedItem().toString()));
 
