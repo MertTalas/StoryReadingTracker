@@ -100,8 +100,8 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i);
-                            textsizeUnit=i;
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i/2);
+                            textsizeUnit=i/2;
                         }
 
                         @Override

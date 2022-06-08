@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Size;
@@ -516,6 +517,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         words = new ArrayList<>();
         textViewSpeechText=findViewById(R.id.textView_storyreading_hiden);
         textViewStoryText = findViewById(R.id.textView_story_reading_page_story_text);
+        textViewStoryText.setMovementMethod(new ScrollingMovementMethod());
         textViewTitle = findViewById(R.id.textView_story_reading_page_title);
         imageButtonCamera = findViewById(R.id.ImageButton_toolbar_camera);
         imageButtonSkip = findViewById(R.id.ImageButton_toolbar_skip);
