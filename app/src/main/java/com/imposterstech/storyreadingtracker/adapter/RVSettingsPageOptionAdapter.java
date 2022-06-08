@@ -28,7 +28,11 @@ import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryFeedbackActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
@@ -93,15 +97,34 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     View viewAlert = inflater.inflate( R.layout.av_set_font_size, null );
                     TextView textViewFontSizeTemplate= viewAlert.findViewById(R.id.textViewTemplate);
                     SeekBar seekBar =viewAlert.findViewById(R.id.seekBar);
+
+
                     AlertDialog.Builder ad = new AlertDialog.Builder(context);
-                    textsizeUnit=Integer.valueOf((int) textViewFontSizeTemplate.getTextSize());
+
+                    try {
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
+                        String line = in.readLine();
+                        if(line!=null) {
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
+                            seekBar.setProgress(Integer.valueOf(line));
+                            textsizeUnit=Integer.valueOf(line);
+                        }
+                        else {
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                            seekBar.setProgress(15);
+                        }
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     ad.setView(viewAlert);
                     ad.setNegativeButton("Cancel",null);
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i+30/2);
-                            textsizeUnit=i+30/2;
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, seekBar.getProgress());
+                            textsizeUnit=i;
                         }
 
                         @Override
@@ -110,6 +133,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {
+
                         }
                     });
                     ad.setPositiveButton("Save", new DialogInterface.OnClickListener() {
