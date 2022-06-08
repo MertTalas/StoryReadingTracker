@@ -4,51 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="horizontal">
+    android:background="@drawable/button_selector"
+    android:elevation="20dp"
+    android:layout_margin="10dp"
+    android:orientation="horizontal" >
 
     <TextView
         android:id="@+id/admin_feedback_page_rv_textview_feedbacktext"
-        android:layout_width="186dp"
-        android:layout_height="89dp"
-        android:text="feedback text"
-        android:textColor="@color/design_default_color_primary_dark"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:text="feedback comment"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/admin_feedback_page_rv_imageview_check"
-        android:layout_width="102dp"
-        android:layout_height="60dp"
-
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_weight="10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
+        app:layout_constraintTop_toBottomOf="@+id/textView_feedback_feedbackdate"
         app:srcCompat="@drawable/ic_feedback_check" />
+
+    <TextView
+        android:id="@+id/admin_main_page_rv_textview_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Story Title:"
+        android:textColor="@color/on_primary"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/admin_main_page_rv_textview_story_feedbackdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Added Date:"
+        android:textColor="@color/on_primary"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
+        app:layout_constraintTop_toBottomOf="@+id/textView_feedback_storytitle" />
 
     <TextView
         android:id="@+id/textView_feedback_feedbackdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="date"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Date"
+        android:textColor="@color/on_primary"
+        android:textSize="12dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_main_page_rv_textview_story_feedbackdate" />
 
     <TextView
         android:id="@+id/textView_feedback_storytitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="13dp"
-        android:text="story title"
-        app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
-        app:layout_constraintTop_toBottomOf="@+id/textView_feedback_feedbackdate" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/on_primary"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:text="Story Title"
+        app:layout_constraintStart_toEndOf="@+id/admin_main_page_rv_textview_story_feedbackdate"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

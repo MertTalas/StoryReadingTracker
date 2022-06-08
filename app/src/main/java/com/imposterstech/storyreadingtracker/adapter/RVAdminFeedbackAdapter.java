@@ -64,7 +64,6 @@ public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedback
 
     @Override
     public void onBindViewHolder(@NonNull OptionHolder holder, int position) {
-
         holder.textViewStoryTitle.setText(allFeedbacks.get(position).getStoryDetails().getTitle());
         holder.textViewFeedbackDate.setText(allFeedbacks.get(position).getCreatedOn().toString());
         holder.textViewFeedbackText.setText(allFeedbacks.get(position).getFeedbackText());
@@ -72,15 +71,12 @@ public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedback
         holder.imageViewCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 Call<Void> checkCall=feedbackAPI.checkFeedback(currentUser.getToken(), allFeedbacks.get(position).getFeedbackId());
-
                                 checkCall.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -107,13 +103,8 @@ public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedback
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Do you want to check the feedback as read ?? ").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Do you want to check the feedback as read ?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
-
-
-
-
-
 
 
             }
@@ -137,7 +128,6 @@ public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedback
             textViewFeedbackDate = (TextView) itemView.findViewById(R.id.textView_feedback_feedbackdate);
             textViewFeedbackText = (TextView) itemView.findViewById(R.id.admin_feedback_page_rv_textview_feedbacktext);
             imageViewCheck = (ImageView) itemView.findViewById(R.id.admin_feedback_page_rv_imageview_check);
-
         }
 
     }

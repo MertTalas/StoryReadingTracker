@@ -10,15 +10,25 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_admin_main_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="400dp"
+        android:layout_height="640dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdminMainPage" />
 
+    <TextView
+        android:id="@+id/textViewAdminMainPage"
+        android:layout_width="412dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_admin_dashboard"
+        android:fontFamily="@font/average_sans"
+        android:text="Admin Dashboard"
+        android:gravity="center"
+        android:textColor="@color/on_primary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

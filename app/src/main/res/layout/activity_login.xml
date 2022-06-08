@@ -46,7 +46,6 @@
         android:text="merttalass@gmail.com"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-
         android:textSize="18sp"
         android:transitionName="edit_tran"
         app:layout_constraintEnd_toEndOf="parent"

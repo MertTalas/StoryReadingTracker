@@ -8,62 +8,77 @@
     tools:context=".view.AdminAddStoryActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/average_sans"
         android:text="Add Story"
-        android:textSize="30sp"
         android:textColor="@color/secondary_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewDesc"
+        android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
         android:text="Enter the details of the story which you want to add"
         android:textColor="@color/secondary"
-
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <EditText
         android:id="@+id/editText_story_add_page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="68dp"
-        android:ems="10"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
         android:hint="Story Title"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
+        android:importantForAutofill="no"
+        android:padding="10dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDesc" />
 
     <EditText
         android:id="@+id/editText_story_add_page_content"
-        android:layout_width="320dp"
-        android:layout_height="222dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="51dp"
-        android:ems="10"
+        android:layout_width="370dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:textSize="14sp"
         android:hint="Story Content"
+        android:gravity="top|left"
         android:inputType="textLongMessage|textPersonName"
-        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_story_add_page_title" />
 
     <Button
         android:id="@+id/button_story_add_page_addstory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="37dp"
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
         android:text="Add Story"
+        android:background="@drawable/button_action"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:textColor="@color/background"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_story_add_page_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
