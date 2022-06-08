@@ -43,7 +43,7 @@
         android:fontFamily="@font/open_sans"
         android:hint="E-mail"
         android:importantForAutofill="no"
-        android:text="merttalass@gmail.com"
+        android:text="fortest2@test.com"
         android:inputType="textEmailAddress"
         android:padding="10dp"
 

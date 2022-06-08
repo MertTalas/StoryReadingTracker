@@ -9,6 +9,7 @@
     android:layout_centerHorizontal="true"
     android:background="@drawable/button_selector"
     android:elevation="20dp"
+    android:layout_marginBottom="10dp"
     android:layout_centerVertical="false">
 
     <androidx.cardview.widget.CardView
