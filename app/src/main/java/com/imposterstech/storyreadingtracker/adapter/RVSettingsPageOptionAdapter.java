@@ -1,5 +1,6 @@
 package com.imposterstech.storyreadingtracker.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,8 +21,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
+import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.service.AvatarAPI;
+import com.imposterstech.storyreadingtracker.service.UserAPI;
 import com.imposterstech.storyreadingtracker.view.AboutActivity;
 import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
@@ -38,15 +45,33 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettingsPageOptionAdapter.OptionHolder>{
 
     ArrayList<MainPageOptions> options;
     private Context context;
     private Fragment f;
     int textsizeUnit;
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
+    Retrofit retrofit;
+    SingletonCurrentUser currentUser;
+    UserAPI userAPI;
 
     public RVSettingsPageOptionAdapter(ArrayList<MainPageOptions> options) {
         this.options = options;
+
+        Gson gson=new GsonBuilder().setLenient().create();
+        currentUser=SingletonCurrentUser.getInstance();
+
+        retrofit=new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        userAPI=retrofit.create(UserAPI.class);
+
     }
     @NonNull
     @Override
@@ -90,17 +115,22 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     try{
                         FileOutputStream fos = context.openFileOutput("session.txt",Context.MODE_PRIVATE);
                         OutputStreamWriter writer = new OutputStreamWriter(fos);
-                        writer.write(String.valueOf(false));
+                        writer.write("false");
                         writer.close();
                     }catch(Exception e){
                         e.printStackTrace();
                     }
 
+
                     holder.itemView.setVisibility(view.VISIBLE);
                     holder.itemView.startAnimation(animation);
 
                     Intent to_login_page= new Intent(context.getApplicationContext(),LoginActivity.class);
+                    to_login_page.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(to_login_page);
+                    ((Activity)context).finishAffinity();
+                    ((Activity)context).finish();
+
 
                 }
                 if(options.get(position).getName().equals("Font Size")){

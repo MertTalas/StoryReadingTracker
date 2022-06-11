@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     Retrofit retrofit;
     private String token;
     private String session;
-
+    private String loggedUserToken;
 
 
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA};
@@ -80,24 +80,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/session.txt"), "UTF8"));
-            String line = in.readLine();
-            if(line!=null) {
-                session=String.valueOf(line);
-            }
-
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-   /*     if(session.equals("true")){
-            finish();
-            Intent to_main_page= new Intent(LoginActivity.this,MainPageActivity.class);
-            startActivity(to_main_page);
-        }*/
 
 
             checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
@@ -116,18 +98,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
         init();
+        readUsersSessionFromFile();
+        controlSession();
     }
     public void init(){
 
 
-        try{
-            FileOutputStream fos = getApplicationContext().openFileOutput("session.txt", Context.MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            writer.write(String.valueOf(true));
-            writer.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
         editTextEmail = findViewById(R.id.editText_loginpage_email);
         editTextPassword = findViewById(R.id.editText_loginpage_password);
@@ -231,6 +207,42 @@ public class LoginActivity extends AppCompatActivity {
         }*/
     }
 
+    private void controlSession(){
+
+        if(session!=null&&loggedUserToken!=null) {
+            if (session.equals("true")) {
+                finish();
+
+                SingletonCurrentUser currentUser = SingletonCurrentUser.getInstance();
+                UserAPI userAPI = retrofit.create(UserAPI.class);
+
+                Call<UserModel> currentUserCall = userAPI.getCurrentUser(loggedUserToken);
+
+
+                currentUserCall.enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        if (response.isSuccessful()) {
+
+                            SingletonCurrentUser currentUser = SingletonCurrentUser.getInstance();
+                            currentUser.setLoggedUser(response.body());
+                            currentUser.setToken(loggedUserToken);
+                           createIntent();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "User expired please login again!!", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+            }
+        }
+    }
     private void createIntent(){
 
         RoleAPI roleAPI=retrofit.create(RoleAPI.class);
@@ -285,6 +297,55 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+    private void writeUsersTokenToFile(String token){
+
+        try{
+            FileOutputStream fos = getApplicationContext().openFileOutput("userToken.txt",Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            writer.write(token);
+            writer.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileOutputStream fos = getApplicationContext().openFileOutput("session.txt",Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            writer.write("true");
+            writer.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    private void readUsersSessionFromFile(){
+        try {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/session.txt"), "UTF8"));
+            String line = in.readLine();
+            if(line!=null) {
+                session=String.valueOf(line);
+            }
+
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/userToken.txt"), "UTF8"));
+            String line = in.readLine();
+            if(line!=null) {
+                loggedUserToken=String.valueOf(line);
+            }
+
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     private void login(){
         //Intent to_main_intent = new Intent(LoginActivity.this, MainPageActivity.class);
@@ -324,6 +385,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Headers headers = response.headers();
                     String authorization = response.headers().get("Authorization");
+
+                    writeUsersTokenToFile(authorization);
 
 
 
