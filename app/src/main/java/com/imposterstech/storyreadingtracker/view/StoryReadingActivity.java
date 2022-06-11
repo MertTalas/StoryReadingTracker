@@ -90,6 +90,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
     private int failAttemp;
     private int successfullAttemp;
+    private ArrayList<String> readedWords= new ArrayList<>();
 
 
     private TextView textViewTitle, textViewStoryText;
@@ -143,7 +144,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS,60000);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS,20000);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS,60000);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
 
@@ -161,43 +162,65 @@ public class StoryReadingActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 if(charSequence.length()<i2){
                     return;
                 }
                 if((wordCounter+2)>words.size()){
                     return;
                 }
+                Log.d("textSpeech",textViewSpeechText.getText().toString());
+                Log.d("i-1",String.valueOf(i));
+                Log.d("i-2",String.valueOf(i1));
+                Log.d("i-3",String.valueOf(i2));
                 String remainingSentence = String.valueOf(charSequence.subSequence(i1, i2));
-                if (!remainingSentence.equals("")) {
-                    if (remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
-                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        textViewStoryText.setText(SS);
-                        charCounter+=words.get(wordCounter).length()+1;
+                WordMicrophone wordMicrophone=new WordMicrophone();
+                   wordMicrophone.setReadedWord(remainingSentence);
+                wordMicrophone.setExpectedWord(words.get(wordCounter));
 
-                    } if(remainingSentence.replaceAll("[^a-zA-Z]+", "").equals((words.get(wordCounter)+words.get(wordCounter+1)).replaceAll("[^a-zA-Z]+",""))){
-                        SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        textViewStoryText.setText(SS);
-                        charCounter+=words.get(wordCounter).length()+words.get(wordCounter+1).length()+2;
+
+                Call<Void> addWordsCall=faceExperienceAPI.addWord(currentUser.getToken(),faceExperienceModel.getFaceExperienceDocumentId(),wordMicrophone );
+
+                addWordsCall.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+
+                    if (!remainingSentence.equals("")) {
+                        if (remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                            SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            textViewStoryText.setText(SS);
+                            charCounter+=words.get(wordCounter).length()+1;
+
+                        } if(remainingSentence.replaceAll("[^a-zA-Z]+", "").equals((words.get(wordCounter)+words.get(wordCounter+1)).replaceAll("[^a-zA-Z]+",""))){
+                            SS.setSpan(fcsGreen,charCounter,charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            textViewStoryText.setText(SS);
+                            charCounter+=words.get(wordCounter).length()+words.get(wordCounter+1).length()+2;
+                            wordCounter++;
+
+                        }
+                        else if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                            SS.setSpan(fcsRed, charCounter, charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            textViewStoryText.setText(SS);
+                            charCounter+=words.get(wordCounter).length()+1;
+
+                        }
                         wordCounter++;
-
                     }
-                    else if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
-                        SS.setSpan(fcsRed, charCounter, charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        textViewStoryText.setText(SS);
-                        charCounter+=words.get(wordCounter).length()+1;
-                        //wordCounter--;
 
-                    }
-                    wordCounter++;
-                }
             }
             @Override
             public void afterTextChanged(Editable editable) {
-
 
             }
         });
@@ -251,23 +274,6 @@ public class StoryReadingActivity extends AppCompatActivity {
 
 
 
-                    WordMicrophone wordMicrophone=new WordMicrophone();
-                    wordMicrophone.setReadedWord(data.get(0));
-                    wordMicrophone.setExpectedWord(words.get(wordCounter));
-
-                    Call<Void> addWordsCall=faceExperienceAPI.addWord(currentUser.getToken(),faceExperienceModel.getFaceExperienceDocumentId(),wordMicrophone );
-
-                    addWordsCall.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-
-                        }
-                    });
 
 
 
