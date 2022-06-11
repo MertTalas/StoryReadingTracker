@@ -17,18 +17,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.view.AboutActivity;
+import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryFeedbackActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
@@ -36,6 +42,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
     ArrayList<MainPageOptions> options;
     private Context context;
+    private Fragment f;
     int textsizeUnit;
 
     public RVSettingsPageOptionAdapter(ArrayList<MainPageOptions> options) {
@@ -80,8 +87,20 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
                     /*Intent to_profile_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
                     holder.itemView.getContext().startActivity(to_profile_intent);*/
+                    try{
+                        FileOutputStream fos = context.openFileOutput("session.txt",Context.MODE_PRIVATE);
+                        OutputStreamWriter writer = new OutputStreamWriter(fos);
+                        writer.write(String.valueOf(false));
+                        writer.close();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                     holder.itemView.setVisibility(view.VISIBLE);
                     holder.itemView.startAnimation(animation);
+
+                    Intent to_login_page= new Intent(context.getApplicationContext(),LoginActivity.class);
+                    context.startActivity(to_login_page);
 
                 }
                 if(options.get(position).getName().equals("Font Size")){
@@ -93,15 +112,34 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     View viewAlert = inflater.inflate( R.layout.av_set_font_size, null );
                     TextView textViewFontSizeTemplate= viewAlert.findViewById(R.id.textViewTemplate);
                     SeekBar seekBar =viewAlert.findViewById(R.id.seekBar);
+
+
                     AlertDialog.Builder ad = new AlertDialog.Builder(context);
-                    textsizeUnit=Integer.valueOf((int) textViewFontSizeTemplate.getTextSize());
+
+                    try {
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
+                        String line = in.readLine();
+                        if(line!=null) {
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
+                            seekBar.setProgress(Integer.valueOf(line));
+                            textsizeUnit=Integer.valueOf(line);
+                        }
+                        else {
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                            seekBar.setProgress(15);
+                        }
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     ad.setView(viewAlert);
                     ad.setNegativeButton("Cancel",null);
                     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, i+30/2);
-                            textsizeUnit=i+30/2;
+                            textViewFontSizeTemplate.setTextSize(TypedValue.COMPLEX_UNIT_SP, seekBar.getProgress());
+                            textsizeUnit=i;
                         }
 
                         @Override
@@ -110,6 +148,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {
+
                         }
                     });
                     ad.setPositiveButton("Save", new DialogInterface.OnClickListener() {
