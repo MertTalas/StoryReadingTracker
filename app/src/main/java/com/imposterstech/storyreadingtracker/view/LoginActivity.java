@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,12 @@ import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.RoleAPI;
 import com.imposterstech.storyreadingtracker.service.UserAPI;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,12 +55,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     UserModel user;
 
     private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
 
     Retrofit retrofit;
     private String token;
+    private String session;
 
 
 
@@ -68,23 +78,65 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/session.txt"), "UTF8"));
+            String line = in.readLine();
+            if(line!=null) {
+                session=String.valueOf(line);
+            }
+
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(session.equals("true")){
+            finish();
+            Intent to_main_page= new Intent(LoginActivity.this,MainPageActivity.class);
+            startActivity(to_main_page);
+        }
+
+
+            checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
+            checkPermission(Manifest.permission.RECORD_AUDIO, RECORD_AUDIO_REQUEST_CODE);
+
+            checkPermission(Manifest.permission.RECORD_AUDIO, RECORD_AUDIO_REQUEST_CODE);
+            //Retrofit & JSON
+
+            Gson gson = new GsonBuilder().setLenient().create();
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+
+
         init();
-        checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
-        checkPermission(Manifest.permission.RECORD_AUDIO,RECORD_AUDIO_REQUEST_CODE);
+    }
+    public void init(){
 
-        checkPermission(Manifest.permission.RECORD_AUDIO,RECORD_AUDIO_REQUEST_CODE);
-        //Retrofit & JSON
 
-        Gson gson=new GsonBuilder().setLenient().create();
+        try{
+            FileOutputStream fos = getApplicationContext().openFileOutput("session.txt", Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            writer.write(String.valueOf(true));
+            writer.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
-        retrofit=new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+        editTextEmail = findViewById(R.id.editText_loginpage_email);
+        editTextPassword = findViewById(R.id.editText_loginpage_password);
+        buttonLogin = findViewById(R.id.button_loginpage_login);
+        buttonRegister=findViewById(R.id.button_loginpage_register);
+        textViewForgotPassword =findViewById(R.id.textView_loginpage_forgotpassword);
+        textViewLoginDashboard =findViewById(R.id.textView_loginpage_dashboard);
+        imageViewDashboard =findViewById(R.id.imageViewDashboard);
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,16 +149,16 @@ public class LoginActivity extends AppCompatActivity {
                 Intent to_register_intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 Pair[] pairs = new Pair[7];
 
-                pairs[0]=new Pair<View,String>(imageViewDashboard,"logo_image");
-                pairs[1]=new Pair<View,String>(textViewLoginDashboard,"logo_text");
-                pairs[2]=new Pair<View,String>(editTextEmail,"edit_tran");
-                pairs[3]=new Pair<View,String>(editTextPassword,"edit_tran");
-                pairs[4]=new Pair<View,String>(textViewForgotPassword,"forgot_tran");
-                pairs[5]=new Pair<View,String>(buttonLogin,"btnLogin_tran");
-                pairs[6]=new Pair<View,String>(buttonRegister,"btnRegister_tran");
+                pairs[0] = new Pair<View, String>(imageViewDashboard, "logo_image");
+                pairs[1] = new Pair<View, String>(textViewLoginDashboard, "logo_text");
+                pairs[2] = new Pair<View, String>(editTextEmail, "edit_tran");
+                pairs[3] = new Pair<View, String>(editTextPassword, "edit_tran");
+                pairs[4] = new Pair<View, String>(textViewForgotPassword, "forgot_tran");
+                pairs[5] = new Pair<View, String>(buttonLogin, "btnLogin_tran");
+                pairs[6] = new Pair<View, String>(buttonRegister, "btnRegister_tran");
 
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this,pairs);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
                     startActivity(to_register_intent, activityOptions.toBundle());
                 }
                 //finish();
@@ -121,15 +173,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
-    public void init(){
-        editTextEmail = findViewById(R.id.editText_loginpage_email);
-        editTextPassword = findViewById(R.id.editText_loginpage_password);
-        buttonLogin = findViewById(R.id.button_loginpage_login);
-        buttonRegister=findViewById(R.id.button_loginpage_register);
-        textViewForgotPassword =findViewById(R.id.textView_loginpage_forgotpassword);
-        textViewLoginDashboard =findViewById(R.id.textView_loginpage_dashboard);
-        imageViewDashboard =findViewById(R.id.imageViewDashboard);
     }
 
 
