@@ -93,11 +93,11 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(session.equals("true")){
+   /*     if(session.equals("true")){
             finish();
             Intent to_main_page= new Intent(LoginActivity.this,MainPageActivity.class);
             startActivity(to_main_page);
-        }
+        }*/
 
 
             checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);

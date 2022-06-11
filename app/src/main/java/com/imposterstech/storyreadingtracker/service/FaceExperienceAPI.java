@@ -3,6 +3,7 @@ package com.imposterstech.storyreadingtracker.service;
 import com.imposterstech.storyreadingtracker.Model.Contour;
 import com.imposterstech.storyreadingtracker.Model.Request.LoginRequestModel;
 import com.imposterstech.storyreadingtracker.Model.Response.FaceExperienceModel;
+import com.imposterstech.storyreadingtracker.Model.WordMicrophone;
 
 import java.util.List;
 
@@ -30,6 +31,12 @@ public interface FaceExperienceAPI {
     @GET("faceExperiences/{faceExperienceId}/contours")
     Call<List<Contour>> getAllContour(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId);
 
+    @GET("faceExperiences/{faceExperienceId}/microphone")
+    Call<List<WordMicrophone>> getAllWords(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId);
+
+
+    @PUT("faceExperiences/{faceExperienceId}/microphone")
+    Call<Void> addWord(@Header("Authorization") String authorization, @Path("faceExperienceId") String faceExperienceId,@Body WordMicrophone wordMicrophone);
 
 
 

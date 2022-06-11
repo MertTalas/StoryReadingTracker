@@ -51,6 +51,7 @@ import com.imposterstech.storyreadingtracker.Model.Response.StoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.Response.UserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentStoryReading;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
+import com.imposterstech.storyreadingtracker.Model.WordMicrophone;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.FaceExperienceAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
@@ -247,6 +248,31 @@ public class StoryReadingActivity extends AppCompatActivity {
                     textViewSpeechText.setText(data.get(0));
                     sentenceControl = data.get(0);
 
+
+
+
+                    WordMicrophone wordMicrophone=new WordMicrophone();
+                    wordMicrophone.setReadedWord(data.get(0));
+                    wordMicrophone.setExpectedWord(words.get(wordCounter));
+
+                    Call<Void> addWordsCall=faceExperienceAPI.addWord(currentUser.getToken(),faceExperienceModel.getFaceExperienceDocumentId(),wordMicrophone );
+
+                    addWordsCall.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+
+
+
+
+
                 }
             }
 
@@ -316,9 +342,7 @@ public class StoryReadingActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(!isStarted){
-                    //speechrecogn
-                    speechRecognizer();
-                    speechRecognizer.startListening(speechRecognizerIntent);
+
 
                     faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
                     Call<FaceExperienceModel> call=faceExperienceAPI.createReading(currentUser.getToken(),storyModel.getStoryId());
@@ -347,6 +371,9 @@ public class StoryReadingActivity extends AppCompatActivity {
                                     public void onResponse(Call<StoryUserModel> call, Response<StoryUserModel> response) {
                                         if(response.isSuccessful()){
                                             buttonStartReading.setText("Stop Readıng");
+                                            //speechrecogn
+                                            speechRecognizer();
+                                            speechRecognizer.startListening(speechRecognizerIntent);
 
                                             Toast.makeText(getApplicationContext(),"Reading experience saved.",Toast.LENGTH_LONG).show();
                                         }
