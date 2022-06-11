@@ -21,6 +21,7 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Size;
@@ -274,6 +275,7 @@ public class StoryReadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState != null) {
             selectedModel = savedInstanceState.getString(STATE_SELECTED_MODEL, FACE_DETECTION);
         }
@@ -308,7 +310,6 @@ public class StoryReadingActivity extends AppCompatActivity {
                 .build();
 
         getRandomStory();
-        setTextSize();
 
         buttonStartReading.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -516,6 +517,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         words = new ArrayList<>();
         textViewSpeechText=findViewById(R.id.textView_storyreading_hiden);
         textViewStoryText = findViewById(R.id.textView_story_reading_page_story_text);
+        textViewStoryText.setMovementMethod(new ScrollingMovementMethod());
         textViewTitle = findViewById(R.id.textView_story_reading_page_title);
         imageButtonCamera = findViewById(R.id.ImageButton_toolbar_camera);
         imageButtonSkip = findViewById(R.id.ImageButton_toolbar_skip);
@@ -533,11 +535,11 @@ public class StoryReadingActivity extends AppCompatActivity {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(new FileInputStream("/data/data/com.imposterstech.storyreadingtracker/files/textsize.txt"), "UTF8"));
             String line = in.readLine();
-            if(line!=null){
-                textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
-            }
-
-
+                if(line!=null) {
+                    textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, Integer.parseInt(line));
+                }
+                else
+                    textViewStoryText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             in.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -629,7 +631,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
             }
         });
-
+        setTextSize();
     }
 
     public void slideUp(View view){

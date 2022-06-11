@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:background="@drawable/button_selector"
+    android:elevation="20dp"
+    android:layout_margin="20dp"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/admin_main_page_rv_textview_name"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:textSize="40sp"
-        android:textColor="@color/design_default_color_primary_dark"
-        android:text="Test"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Title"
+        android:textColor="@color/on_primary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </TextView>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -108,8 +108,8 @@ public class RVAdminRemoveStoryAdapter extends RecyclerView.Adapter<RVAdminRemov
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Do you want to remove the story ?? "+allStories.get(position).getTitle()+" ??").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+                builder.setMessage("Do you want to remove the story ?: "+allStories.get(position).getTitle()).setPositiveButton("DELETE", dialogClickListener)
+                        .setNegativeButton("CANCEL", dialogClickListener).show();
 
             }
         });

@@ -87,7 +87,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
 
         holder.textViewAvatarName.setText(allAvatars.get(position).getAvatarName());
         holder.textViewAvatarPrice.setText("Avatar Price: "+String.valueOf(allAvatars.get(position).getAvatarPrice()));
-        AvatarModel avatartempModel;
+
         Call<List<AvatarModel>> call=avatarAPI.getUserAvatars(currentUser.getToken());
         call.enqueue(new Callback<List<AvatarModel>>() {
             @Override
@@ -134,7 +134,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                 holder.selectedAvatar=currentUser.getLoggedUser().getChosenAvatarUrl();
-                if(holder.isBought&&!holder.selectedAvatar.equals(allAvatars.get(position).getAvatarURL())){
+                if(holder.isBought){
                     View viewAlert = inflater.inflate( R.layout.av_select_avatar, null );
 
                     ImageView imageView =viewAlert.findViewById(R.id.imageView_buy_avatar_image);
@@ -201,9 +201,8 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
                                         //allAvatars.add(allAvatars.get(position));
                                         Toast.makeText(view.getContext(), "Avatar bought!!", Toast.LENGTH_LONG).show();
                                         holder.imageViewAvatarLock.setImageResource(0);
+                                        holder.isBought=true;
                                         currentUser.getLoggedUser().setPoints(currentUser.getLoggedUser().getPoints() - avatarRequestModel.getAvatarPrice());
-
-                                        notifyItemChanged(position);
                                     } else {
                                         try {
                                             JSONObject jObjError = new JSONObject(response.errorBody().string());

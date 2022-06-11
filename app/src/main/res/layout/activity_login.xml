@@ -43,10 +43,9 @@
         android:fontFamily="@font/open_sans"
         android:hint="E-mail"
         android:importantForAutofill="no"
-        android:text="emreak@test.com"
+        android:text="merttalass@gmail.com"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-
         android:textSize="18sp"
         android:transitionName="edit_tran"
         app:layout_constraintEnd_toEndOf="parent"

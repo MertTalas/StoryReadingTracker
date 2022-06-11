@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_centerInParent="true"
     android:layout_centerHorizontal="true"
+    android:background="@drawable/button_selector"
+    android:elevation="20dp"
+    android:layout_marginBottom="10dp"
     android:layout_centerVertical="false">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_avatar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
@@ -29,7 +33,7 @@
                 android:id="@+id/imageView_avatar_picture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:foregroundGravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,47 +42,60 @@
 
             <TextView
                 android:id="@+id/textView_avatar_name"
-                android:layout_width="108dp"
-                android:layout_height="22dp"
-                android:layout_marginTop="104dp"
-                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/open_sans"
+                android:text="AvatarName"
+                android:textColor="@color/on_primary"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_avatar_picture" />
 
             <TextView
                 android:id="@+id/textView_avatar_price"
-                android:layout_width="132dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/open_sans"
+                android:text="999"
+                android:textColor="@color/on_primary"
+                android:textSize="14dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_avatar_picture" />
 
             <ImageView
                 android:id="@+id/imageView_avatar_lock"
-                android:layout_width="41dp"
+                android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="44dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView_avatar_picture"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_lock_24" />
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="98dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="4dp"
-                android:text="Avatar name: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Avatar Name: "
+                android:textColor="@color/on_primary"
+                android:textSize="14dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView_avatar_name"
-                app:layout_constraintHorizontal_bias="0.206"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_avatar_picture" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
