@@ -1,5 +1,6 @@
 package com.imposterstech.storyreadingtracker.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -114,25 +115,21 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     try{
                         FileOutputStream fos = context.openFileOutput("session.txt",Context.MODE_PRIVATE);
                         OutputStreamWriter writer = new OutputStreamWriter(fos);
-                        writer.write(String.valueOf(false));
+                        writer.write("false");
                         writer.close();
                     }catch(Exception e){
                         e.printStackTrace();
                     }
-                    try{
-                        FileOutputStream fos = context.openFileOutput("userToken.txt",Context.MODE_PRIVATE);
-                        OutputStreamWriter writer = new OutputStreamWriter(fos);
-                        writer.write(currentUser.getToken());
-                        writer.close();
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
+
 
                     holder.itemView.setVisibility(view.VISIBLE);
                     holder.itemView.startAnimation(animation);
 
                     Intent to_login_page= new Intent(context.getApplicationContext(),LoginActivity.class);
+                    to_login_page.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(to_login_page);
+                    ((Activity)context).finishAffinity();
+                    ((Activity)context).finish();
 
 
                 }
