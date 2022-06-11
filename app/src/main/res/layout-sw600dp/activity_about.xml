@@ -5,32 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/logo"
-    tools:context=".view.SplashScreenActivity">
+    tools:context=".view.AboutActivity">
 
     <ImageView
-        android:id="@+id/imageViewSplashScreenLogo"
-        android:layout_width="470dp"
-        android:layout_height="330dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/imageViewAboutAppLogo"
+        android:layout_width="700dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewSplashScreenSlogan"
+        android:id="@+id/textViewVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
+        android:layout_marginTop="8dp"
+        android:text="Version 1.0"
         android:fontFamily="@font/open_sans"
-        android:text="Improve Your Story Reading Skills"
-        android:textColor="@color/on_background"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/on_primary"
+        android:textSize="80dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAboutAppLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
