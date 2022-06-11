@@ -17,11 +17,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imposterstech.storyreadingtracker.Model.MainPageOptions;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.view.AboutActivity;
+import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
@@ -40,6 +42,7 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
 
     ArrayList<MainPageOptions> options;
     private Context context;
+    private Fragment f;
     int textsizeUnit;
 
     public RVSettingsPageOptionAdapter(ArrayList<MainPageOptions> options) {
@@ -84,8 +87,20 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                     Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_animation);
                     /*Intent to_profile_intent=new Intent(holder.itemView.getContext(), ProfileActivity.class);
                     holder.itemView.getContext().startActivity(to_profile_intent);*/
+                    try{
+                        FileOutputStream fos = context.openFileOutput("session.txt",Context.MODE_PRIVATE);
+                        OutputStreamWriter writer = new OutputStreamWriter(fos);
+                        writer.write(String.valueOf(false));
+                        writer.close();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                     holder.itemView.setVisibility(view.VISIBLE);
                     holder.itemView.startAnimation(animation);
+
+                    Intent to_login_page= new Intent(context.getApplicationContext(),LoginActivity.class);
+                    context.startActivity(to_login_page);
 
                 }
                 if(options.get(position).getName().equals("Font Size")){
