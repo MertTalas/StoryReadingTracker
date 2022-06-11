@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface"
+    tools:context=".view.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/imageViewDashboardRegister"
+        android:layout_width="800dp"
+        android:layout_height="300dp"
+        android:background="@drawable/button_dashboard"
+        android:src="@drawable/logo"
+        android:transitionName="logo_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_registerpage_dashboardregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/average_sans"
+        android:hint="Welcome,"
+        android:textColor="@color/on_primary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:transitionName="logo_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDashboardRegister" />
+
+
+    <EditText
+        android:id="@+id/editText_RegisterPage_name"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:hint="Name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:transitionName="edit_tran"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_registerpage_dashboardregister" />
+
+    <EditText
+        android:id="@+id/editText_RegisterPage_surname"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:hint="Surname"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:transitionName="edit_tran"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_RegisterPage_name" />
+
+    <EditText
+        android:id="@+id/editText_RegisterPage_email"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:hint="Email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:transitionName="edit_tran"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_RegisterPage_surname" />
+
+    <EditText
+        android:id="@+id/editText_RegisterPage_password"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_selector"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:hint="Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:transitionName="edit_tran"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_RegisterPage_email" />
+
+    <Spinner
+        android:id="@+id/spinner_registerPage_age"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/blue_outline"
+        android:contentDescription="Age"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:popupBackground="@drawable/button_selector"
+        android:spinnerMode="dropdown"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_RegisterPage_password" />
+
+    <CheckBox
+        android:id="@+id/checkBox_registerpage_termsPolicies"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Privacy and Policy"
+        android:fontFamily="@font/open_sans"
+        android:text="By Registering to System in You are agreeing our Terms and Privacy Policies"
+        android:textStyle="bold"
+        android:transitionName="forgot_tran"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_registerPage_gender" />
+
+    <Spinner
+        android:id="@+id/spinner_registerPage_gender"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/blue_outline"
+        android:contentDescription="Gender"
+        android:elevation="10dp"
+        android:fontFamily="@font/open_sans"
+        android:popupBackground="@drawable/button_selector"
+        android:spinnerMode="dropdown"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_registerPage_age" />
+
+    <Button
+        android:id="@+id/button_registerpage_register"
+        android:layout_width="700dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_action"
+        android:fontFamily="@font/open_sans"
+        android:padding="10dp"
+        android:text="Regıster now"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/background"
+        android:transitionName="btnRegister_tran"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_registerpage_termsPolicies" />
+</androidx.constraintlayout.widget.ConstraintLayout>
