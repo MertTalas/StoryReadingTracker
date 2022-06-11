@@ -11,13 +11,13 @@
 
     <TextView
         android:id="@+id/admin_feedback_page_rv_textview_feedbacktext"
-        android:layout_width="150dp"
+        android:layout_width="400dp"
         android:layout_height="0dp"
         android:background="@drawable/button_selector"
         android:elevation="10dp"
         android:padding="5dp"
         android:text="feedback comment"
-        android:textSize="10sp"
+        android:textSize="20sp"
         android:scrollbars = "vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,8 @@
 
     <ImageView
         android:id="@+id/admin_feedback_page_rv_imageview_check"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_weight="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:fontFamily="@font/open_sans"
         android:text="Story Title:"
         android:textColor="@color/on_primary"
-        android:textSize="12dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
         android:fontFamily="@font/open_sans"
         android:text="Added Date:"
         android:textColor="@color/on_primary"
-        android:textSize="12dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
         app:layout_constraintTop_toBottomOf="@+id/textView_feedback_storytitle" />
@@ -71,7 +71,7 @@
         android:fontFamily="@font/open_sans"
         android:text="Date"
         android:textColor="@color/on_primary"
-        android:textSize="12dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/admin_feedback_page_rv_textview_feedbacktext"
         app:layout_constraintTop_toBottomOf="@+id/admin_main_page_rv_textview_story_feedbackdate" />
@@ -84,7 +84,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans"
         android:textColor="@color/on_primary"
-        android:textSize="12dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:text="Story Title"
         app:layout_constraintStart_toEndOf="@+id/admin_main_page_rv_textview_story_feedbackdate"
