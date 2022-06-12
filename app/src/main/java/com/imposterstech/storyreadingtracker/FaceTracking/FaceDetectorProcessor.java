@@ -92,7 +92,7 @@ public class FaceDetectorProcessor  extends VisionProcessorBase<List<Face>> {
         float rotY = face.getHeadEulerAngleY();  // Head is rotated to the right rotY degrees
         float rotZ = face.getHeadEulerAngleZ();  // Head is tilted sideways rotZ degrees
 
-        Log.e("say abi","sayıyomabi");
+
 
         // If classification was enabled:
         if (face.getSmilingProbability() != null) {
@@ -137,7 +137,7 @@ public class FaceDetectorProcessor  extends VisionProcessorBase<List<Face>> {
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e("facepoint","fail kayıt ");
+
             }
         });
 

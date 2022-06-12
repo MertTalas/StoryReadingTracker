@@ -161,13 +161,13 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                         if(response.isSuccessful()) {
                             currentUser.setLoggedUser(response.body());
-                            Toast.makeText(getApplicationContext(),"Changes Applied!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Changes Applied!",Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<UserModel> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),"Failed to Change!!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Failed to Change!",Toast.LENGTH_SHORT).show();
 
 
                     }

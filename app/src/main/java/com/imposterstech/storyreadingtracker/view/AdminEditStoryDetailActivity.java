@@ -58,7 +58,7 @@ public class AdminEditStoryDetailActivity extends AppCompatActivity {
                 String storyContent=editTextStoryContent.getText().toString();
 
                 if(storyTitle.equals(null)&storyContent.equals(null)){
-                    Toast.makeText(getApplicationContext(),"Title and content cannot be null!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Title and content cannot be empty!",Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -73,7 +73,7 @@ public class AdminEditStoryDetailActivity extends AppCompatActivity {
                     public void onResponse(Call<StoryModel> call, Response<StoryModel> response) {
                         if(response.isSuccessful()){
                             storyModel= response.body();
-                            Toast.makeText(getApplicationContext(),"Story updated!!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Story updated!",Toast.LENGTH_LONG).show();
                             finish();
                         }
                     }

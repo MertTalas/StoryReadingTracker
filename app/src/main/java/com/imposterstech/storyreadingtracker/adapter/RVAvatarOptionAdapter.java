@@ -1,5 +1,6 @@
 package com.imposterstech.storyreadingtracker.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -30,6 +31,7 @@ import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.AvatarAPI;
 import com.imposterstech.storyreadingtracker.service.StoryAPI;
+import com.imposterstech.storyreadingtracker.view.AvatarActivity;
 
 
 import org.json.JSONObject;
@@ -122,6 +124,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
         });
         Resources res = holder.itemView.getContext().getResources();
 
+
         String fnm = "avatar"+i; //  this is image file name
         String PACKAGE_NAME = context.getPackageName();
         int imgId = res.getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
@@ -156,14 +159,14 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
                                 public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {
                                     if(response.isSuccessful()){
                                         currentUser.getLoggedUser().setChosenAvatarUrl(avatarRequestModel.getAvatarURL());
-                                        Toast.makeText(view.getContext(), "Avatar selected!!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(view.getContext(), "Avatar selected!", Toast.LENGTH_LONG).show();
                                         holder.selectedAvatar=currentUser.getLoggedUser().getChosenAvatarUrl();
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(Call<AvatarModel> call, Throwable t) {
-                                    Toast.makeText(view.getContext(), "Unable to select avatar!!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(view.getContext(), "Unable to select avatar!", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -199,10 +202,14 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
                                 public void onResponse(Call<AvatarModel> call, Response<AvatarModel> response) {
                                     if (response.isSuccessful()) {
                                         //allAvatars.add(allAvatars.get(position));
-                                        Toast.makeText(view.getContext(), "Avatar bought!!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(view.getContext(), "Avatar bought!", Toast.LENGTH_LONG).show();
                                         holder.imageViewAvatarLock.setImageResource(0);
                                         holder.isBought=true;
                                         currentUser.getLoggedUser().setPoints(currentUser.getLoggedUser().getPoints() - avatarRequestModel.getAvatarPrice());
+                                        if (context instanceof AvatarActivity) {
+                                            TextView txtView = (TextView) ((AvatarActivity)context).findViewById(R.id.textView_avatar_user_coin_amount);
+                                            txtView.setText((Integer.parseInt((String) txtView.getText())-allAvatars.get(position).getAvatarPrice())+"");
+                                        }
                                     } else {
                                         try {
                                             JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -218,7 +225,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
 
                                 @Override
                                 public void onFailure(Call<AvatarModel> call, Throwable t) {
-                                    Toast.makeText(view.getContext(), "Cant retrieve data", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(view.getContext(), "Fail!", Toast.LENGTH_LONG).show();
 
 
                                 }
@@ -244,6 +251,7 @@ public class RVAvatarOptionAdapter extends RecyclerView.Adapter<RVAvatarOptionAd
         public ImageView imageViewAvatar,imageViewAvatarLock;
         public Boolean isBought;
         public String selectedAvatar;
+
 
 
 

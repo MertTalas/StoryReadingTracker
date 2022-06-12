@@ -79,7 +79,7 @@
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_register.xml" value="0.17008196721311475" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_settings.xml" value="0.190625" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_splash_screen.xml" value="0.16486486486486487" />
-        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_story_reading.xml" value="0.27705627705627706" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_story_reading.xml" value="0.4" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_buy_avatar.xml" value="0.16" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_select_avatar.xml" value="0.176" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_set_font_size.xml" value="0.264" />
@@ -105,12 +105,14 @@
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_exit.xml" value="0.325" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_restart.xml" value="0.3675" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_toolbar_skip.xml" value="0.325" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_add_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_edit_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_edit_story_detail.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_feedback_check.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_main_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_admin_remove_story.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_avatar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_camera_revizualize.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_change_password.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/activity_forgot_password.xml" value="0.36666666666666664" />

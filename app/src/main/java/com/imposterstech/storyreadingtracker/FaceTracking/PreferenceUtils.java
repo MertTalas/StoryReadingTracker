@@ -27,6 +27,18 @@ public class PreferenceUtils {
                 .apply();
     }
 
+
+
+    public static FaceDetectorOptions getFaceDetectorOptions(Context context) {
+
+        return new FaceDetectorOptions.Builder()
+                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL) // face contours
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)//eyes open or not
+                .build();
+    }
+
+
+
   /*  @Nullable
     public static CameraSource.SizePair getCameraPreviewSizePair(Context context, int cameraId) {
         Preconditions.checkArgument(
@@ -78,13 +90,6 @@ public class PreferenceUtils {
 
 
 
-    public static FaceDetectorOptions getFaceDetectorOptions(Context context) {
-
-        return new FaceDetectorOptions.Builder()
-                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL) // face contours
-                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)//eyes open or not
-                .build();
-    }
 
 
 

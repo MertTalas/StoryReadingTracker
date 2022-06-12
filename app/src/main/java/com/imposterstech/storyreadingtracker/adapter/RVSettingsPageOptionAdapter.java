@@ -187,8 +187,12 @@ public class RVSettingsPageOptionAdapter extends RecyclerView.Adapter<RVSettings
                             try{
                                 FileOutputStream fos = context.openFileOutput("textsize.txt",Context.MODE_PRIVATE);
                                 OutputStreamWriter writer = new OutputStreamWriter(fos);
-                                writer.write(Integer.toString(textsizeUnit));
-                                writer.close();
+                                if(textsizeUnit>12) {
+
+                                    writer.write(Integer.toString(textsizeUnit));
+                                    writer.close();
+                                }
+
                             }catch(Exception e){
                                 e.printStackTrace();
                             }

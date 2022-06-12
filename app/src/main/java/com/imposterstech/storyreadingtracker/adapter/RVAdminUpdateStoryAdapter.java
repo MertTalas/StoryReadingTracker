@@ -15,6 +15,7 @@ import com.imposterstech.storyreadingtracker.Model.Response.StoryModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentEditableStory;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentReadedStory;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.view.AdminEditStoryActivity;
 import com.imposterstech.storyreadingtracker.view.AdminEditStoryDetailActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingDetailActivity;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class RVAdminUpdateStoryAdapter extends RecyclerView.Adapter<RVAdminUpdateStoryAdapter.OptionHolder>{
 
     ArrayList<StoryModel> allStories;
-
+    Context context;
 
 
 
@@ -35,6 +36,7 @@ public class RVAdminUpdateStoryAdapter extends RecyclerView.Adapter<RVAdminUpdat
     @Override
     public OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_admin_edit_story_row, parent, false);
+        context= parent.getContext();
         return new RVAdminUpdateStoryAdapter.OptionHolder(itemView);
     }
 
@@ -51,6 +53,7 @@ public class RVAdminUpdateStoryAdapter extends RecyclerView.Adapter<RVAdminUpdat
                 SingletonCurrentEditableStory singletonCurrentEditableStory = SingletonCurrentEditableStory.getInstance();
                 singletonCurrentEditableStory.setStoryModel(allStories.get(position));
                 holder.itemView.getContext().startActivity(intent);
+                ((AdminEditStoryActivity)context).finish();
 
             }
         });

@@ -391,7 +391,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                                             speechRecognizer();
                                             speechRecognizer.startListening(speechRecognizerIntent);
 
-                                            Toast.makeText(getApplicationContext(),"Reading experience saved.",Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(getApplicationContext(),"Reading experience saved.",Toast.LENGTH_LONG).show();
                                         }
                                     }
 
@@ -615,7 +615,7 @@ public class StoryReadingActivity extends AppCompatActivity {
             public void onResponse(Call<StoryUserModel> call, Response<StoryUserModel> response) {
                 if (response.isSuccessful()) {
 
-                    Toast.makeText(getApplicationContext(), "Reading experience saved.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Reading experience saved.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -631,7 +631,7 @@ public class StoryReadingActivity extends AppCompatActivity {
         callFaceExperience.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(getApplicationContext(), "Face experience saved.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Face experience saved.", Toast.LENGTH_LONG).show();
                 contourList = null;
                 contourList = new ArrayList<>();
             }
