@@ -24,7 +24,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.CameraRevizualize"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.AdminFeedbackCheckActivity"
             android:exported="false"

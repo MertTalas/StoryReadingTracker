@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/avd_done.xml" value="0.1215" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/black_background.xml" value="0.106" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/blue_background.xml" value="0.1035" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/blue_outline.xml" value="0.235" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/button_action.xml" value="0.235" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/button_admin_dashboard.xml" value="0.213" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/button_dashboard.xml" value="0.235" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/button_selector.xml" value="0.235" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/gradient_background.xml" value="0.106" />
@@ -20,16 +22,77 @@
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/ic_settings_give_feedback.xml" value="0.119" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/ic_show_password.xml" value="0.235" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/drawable/shape.xml" value="0.235" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_about.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_add_story.xml" value="0.176" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_edit_story.xml" value="0.1" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_edit_story_detail.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_feedback_check.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_main_page.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_admin_remove_story.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_avatar.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_camera_revizualize.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_change_password.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_feedback.xml" value="0.176" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_forgot_password.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_main_page.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_past_reading.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_past_reading_detail.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_profile.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_ranking.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_register.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_settings.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_splash_screen.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/activity_story_reading.xml" value="0.12" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/av_buy_avatar.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/av_select_avatar.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/av_set_font_size.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_admin_edit_story_row.xml" value="0.144" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_admin_feedback_row.xml" value="0.2" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_admin_main_option_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_admin_remove_story_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_avatar_option_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_main_option_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_past_reading_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_ranking_first_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_ranking_row.xml" value="0.12293729372937294" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw600dp/rv_reading_detail_row.xml" value="0.11778052805280528" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout-sw720dp/activity_login.xml" value="0.2" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_about.xml" value="0.2" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_add_story.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_edit_story.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_edit_story_detail.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_feedback_check.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_main_page.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_admin_remove_story.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_avatar.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_camera_revizualize.xml" value="0.264" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_change_password.xml" value="0.17008196721311475" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_feedback.xml" value="0.1" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_forgot_password.xml" value="0.17008196721311475" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_login.xml" value="0.16486486486486487" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_main_page.xml" value="0.17008196721311475" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_past_reading.xml" value="0.16" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_past_reading_detail.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_profile.xml" value="0.2" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_ranking.xml" value="0.190625" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_register.xml" value="0.17008196721311475" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_settings.xml" value="0.190625" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_splash_screen.xml" value="0.16486486486486487" />
-        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_story_reading.xml" value="0.16" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/activity_story_reading.xml" value="0.4" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_buy_avatar.xml" value="0.16" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_select_avatar.xml" value="0.176" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/av_set_font_size.xml" value="0.264" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_admin_edit_story_row.xml" value="0.264" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_admin_feedback_row.xml" value="0.176" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_admin_main_option_row.xml" value="0.16799999999999998" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_admin_remove_story_row.xml" value="0.190625" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_avatar_option_row.xml" value="0.2" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_main_option_row.xml" value="0.17008196721311475" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_past_reading_row.xml" value="0.2" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_ranking_first_row.xml" value="0.4" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_ranking_row.xml" value="0.6" />
+        <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/rv_reading_detail_row.xml" value="0.144" />
         <entry key="..\:/StoryReadingTracker/app/src/main/res/layout/toolbar_reading_story.xml" value="0.190625" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.3145" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/drawable/ic_feedback_check.xml" value="0.264" />
@@ -66,7 +129,6 @@
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/rv_main_option_row.xml" value="0.5" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/rv_past_reading_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/rv_ranking_row.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/rv_reading_detail_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/batuhan/Desktop/flutter_projects/StoryReadingTracker/app/src/main/res/layout/toolbar_reading_story.xml" value="0.436241610738255" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/tr/AndroidStudioProjects/StoryReadingTracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.28802083333333334" />
