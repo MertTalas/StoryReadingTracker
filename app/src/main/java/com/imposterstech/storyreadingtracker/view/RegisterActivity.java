@@ -98,6 +98,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+
     private void register(){
         UserAPI userAPI=retrofit.create(UserAPI.class);
 
@@ -128,6 +133,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if(!termsAndPolicies){
             Toast.makeText(getApplicationContext(),"You have to accept the privacy and policy.",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!isEmailValid(editTextEmail.getText().toString())){
+            Toast.makeText(getApplicationContext(),"Your Email is invalid",Toast.LENGTH_LONG).show();
             return;
         }
 
