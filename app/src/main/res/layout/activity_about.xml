@@ -31,4 +31,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewAboutAppLogo" />
 
+    <TextView
+        android:id="@+id/textViewTips"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:background="@color/logo"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:text="test"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVersion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

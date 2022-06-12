@@ -86,7 +86,7 @@ public class StoryFeedbackActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<FeedbackModel> call, Response<FeedbackModel> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Feedback submit is completed!!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Feedback submitted!",Toast.LENGTH_LONG).show();
                             finish();
                         }
 
