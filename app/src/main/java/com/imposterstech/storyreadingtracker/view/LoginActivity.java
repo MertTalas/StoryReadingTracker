@@ -85,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             checkPermission(Manifest.permission.CAMERA, CAMERA_REQUEST_CODE);
             checkPermission(Manifest.permission.RECORD_AUDIO, RECORD_AUDIO_REQUEST_CODE);
 
-            checkPermission(Manifest.permission.RECORD_AUDIO, RECORD_AUDIO_REQUEST_CODE);
             //Retrofit & JSON
 
             Gson gson = new GsonBuilder().setLenient().create();
