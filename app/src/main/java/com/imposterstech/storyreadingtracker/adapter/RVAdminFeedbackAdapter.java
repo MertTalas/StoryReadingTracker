@@ -83,13 +83,13 @@ public class RVAdminFeedbackAdapter extends RecyclerView.Adapter<RVAdminFeedback
                                         if(response.isSuccessful()){
                                             allFeedbacks.remove(allFeedbacks.get(position));
                                             notifyItemRemoved(position);
-                                            Toast.makeText(view.getContext(), "Feedback checked!!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(view.getContext(), "Feedback checked",Toast.LENGTH_LONG).show();
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
-                                        Toast.makeText(view.getContext(), "Fail!!",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(view.getContext(), "Fail!",Toast.LENGTH_LONG).show();
                                     }
                                 });
                                 //Yes button clicked

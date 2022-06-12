@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.imposterstech.storyreadingtracker.BASEURL;
 import com.imposterstech.storyreadingtracker.Model.Request.PasswordChangeRequestModel;
 import com.imposterstech.storyreadingtracker.R;
 import com.imposterstech.storyreadingtracker.service.PasswordChangeAPI;
@@ -25,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChangePasswordActivity extends AppCompatActivity {
 
 
-    private String BASE_URL="http://192.168.1.21:8080/story-app-ws/";
+    private String BASE_URL= BASEURL.BASE_URL.getBase_URL();
     Retrofit retrofit;
     PasswordChangeAPI passwordChangeAPI;
 
@@ -66,7 +67,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),"PROBLEM!!#>!PROBLEM",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Email couldn't found!",Toast.LENGTH_LONG).show();
                     }
                 });
 

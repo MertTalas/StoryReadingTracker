@@ -180,19 +180,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(LoginActivity.this, "Camera Permission Granted", Toast.LENGTH_SHORT) .show();
+                //Toast.makeText(LoginActivity.this, "Camera Permission Granted", Toast.LENGTH_SHORT) .show();
             }
             else {
-                Toast.makeText(LoginActivity.this, "Camera Permission Denied", Toast.LENGTH_SHORT) .show();
+                //Toast.makeText(LoginActivity.this, "Camera Permission Denied", Toast.LENGTH_SHORT) .show();
             }
 
         }
         if(requestCode==RECORD_AUDIO_REQUEST_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(LoginActivity.this, "Record audio Permission Granted", Toast.LENGTH_SHORT) .show();
+                //Toast.makeText(LoginActivity.this, "Record audio Permission Granted", Toast.LENGTH_SHORT) .show();
             }
             else {
-                Toast.makeText(LoginActivity.this, "Record audio Permission Denied", Toast.LENGTH_SHORT) .show();
+                //Toast.makeText(LoginActivity.this, "Record audio Permission Denied", Toast.LENGTH_SHORT) .show();
             }
         }
 
@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<UserModel> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "User expired please login again!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "User expired please login again!", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -418,6 +418,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Failed login.",Toast.LENGTH_LONG).show();
                 //Log.e("fail","failyaw");
+
             }
         });
 
@@ -440,7 +441,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.e("hataaa","noluyoo");
+
+
             }
         });
     }

@@ -66,7 +66,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<PasswordChangeModel> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),"PROBLEM!!#>!PROBLEM",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Wrong Verification Code",Toast.LENGTH_LONG).show();
                     }
                 });
 
