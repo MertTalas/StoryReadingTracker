@@ -209,7 +209,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                             wordCounter++;
 
                         }
-                        else if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
+                         if(!remainingSentence.replaceAll("[^a-zA-Z]+", "").equals(words.get(wordCounter).replaceAll("[^a-zA-Z]+",""))){
                             SS.setSpan(fcsRed, charCounter, charCounter+words.get(wordCounter).length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                             textViewStoryText.setText(SS);
                             charCounter+=words.get(wordCounter).length()+1;
@@ -343,13 +343,23 @@ public class StoryReadingActivity extends AppCompatActivity {
 
         getRandomStory();
 
+
+        imageButtonSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getRandomStory();
+            }
+        });
+
+
+
         buttonStartReading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(!isStarted){
 
-
+                    imageButtonSkip.setClickable(false);
                     faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
                     Call<FaceExperienceModel> call=faceExperienceAPI.createReading(currentUser.getToken(),storyModel.getStoryId());
                     call.enqueue(new Callback<FaceExperienceModel>() {
@@ -430,7 +440,7 @@ public class StoryReadingActivity extends AppCompatActivity {
                     //spechrecogni
                     speechRecognizer.stopListening();
 
-
+                    imageButtonSkip.setClickable(true);
                     buttonStartReading.setText("Start Readıng");
                     isStarted=false;
                     imageProcessor.stop();
@@ -652,6 +662,7 @@ public class StoryReadingActivity extends AppCompatActivity {
 
                     textViewStoryText.setText(response.body().getStoryText());
                     textViewTitle.setText(response.body().getTitle());
+                    words=new ArrayList<>();
                     setWords(words);
                 } else {
                     Toast.makeText(getApplicationContext(), "Something is wrong restart app.", Toast.LENGTH_LONG).show();
