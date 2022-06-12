@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(name)) {
-            editTextPassword.setError("Name cannot be empty!");
+            editTextName.setError("Name cannot be empty!");
             return;
         }
         if (TextUtils.isEmpty(password)) {
@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(surname)) {
-            editTextPassword.setError("Surname cannot be empty!");
+            editTextSurname.setError("Surname cannot be empty!");
             return;
         }
         if(!termsAndPolicies){
