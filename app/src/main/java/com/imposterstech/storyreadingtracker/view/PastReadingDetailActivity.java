@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Preview;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,10 +32,14 @@ import com.imposterstech.storyreadingtracker.Model.Response.SimpleStoryUserModel
 import com.imposterstech.storyreadingtracker.Model.Response.StoryUserModel;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentReadedStory;
 import com.imposterstech.storyreadingtracker.Model.SingletonCurrentUser;
+import com.imposterstech.storyreadingtracker.Model.WordMicrophone;
 import com.imposterstech.storyreadingtracker.R;
+import com.imposterstech.storyreadingtracker.adapter.RVPastReadingWordAdapter;
+import com.imposterstech.storyreadingtracker.adapter.RVStoryReadingPageAdapter;
 import com.imposterstech.storyreadingtracker.service.FaceExperienceAPI;
 import com.imposterstech.storyreadingtracker.service.StoryUserAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,6 +54,10 @@ public class PastReadingDetailActivity extends AppCompatActivity {
     SimpleStoryUserModel simpleStoryUserModel;
     private GraphicOverlay graphicOverlay;
     private View preview;
+
+
+    ArrayList<WordMicrophone> allWords;
+    RecyclerView recyclerViewMicrophoneWords;
 
 
 
@@ -84,6 +94,8 @@ public class PastReadingDetailActivity extends AppCompatActivity {
                 .build();
 
         faceExperienceAPI=retrofit.create(FaceExperienceAPI.class);
+
+        recyclerViewMicrophoneWords=findViewById(R.id.recycler_past_reading_page_words);
 
 
         preview=findViewById(R.id.preview_view_past_reading);
@@ -154,6 +166,33 @@ public class PastReadingDetailActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        Call<List<WordMicrophone>> callWords=faceExperienceAPI.getAllWords(currentUser.getToken(),singletonCurrentReadedStory.getSimpleStoryUserModel().getFaceExperienceDocumentId());
+
+        callWords.enqueue(new Callback<List<WordMicrophone>>() {
+            @Override
+            public void onResponse(Call<List<WordMicrophone>> call, Response<List<WordMicrophone>> response) {
+                if(response.isSuccessful()){
+                    List<WordMicrophone> tempList=response.body();
+                    recyclerViewMicrophoneWords.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    allWords=new ArrayList(tempList);
+                    RVPastReadingWordAdapter rvPastReadingWordAdapter= new RVPastReadingWordAdapter(allWords);
+                    recyclerViewMicrophoneWords.setAdapter(rvPastReadingWordAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WordMicrophone>> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+
 
 
 
