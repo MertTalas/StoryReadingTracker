@@ -1,5 +1,7 @@
 package com.imposterstech.storyreadingtracker;
 
+import static androidx.test.espresso.action.ViewActions.clearText;
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -20,9 +22,9 @@ public class ProfileTestPlan {
     public void login() {
         try {
             Espresso.onView(ViewMatchers.withId(R.id.editText_loginpage_email))
-                    .perform(ViewActions.typeText("test@mail.com"), ViewActions.closeSoftKeyboard());
+                    .perform(clearText(), ViewActions.typeText("test@mail.com"), ViewActions.closeSoftKeyboard());
             Espresso.onView(ViewMatchers.withId(R.id.editText_loginpage_password))
-                    .perform(ViewActions.typeText("test123"), ViewActions.closeSoftKeyboard());
+                    .perform(clearText(), ViewActions.typeText("test123"), ViewActions.closeSoftKeyboard());
             Espresso.onView(ViewMatchers.withId(R.id.button_loginpage_login)).perform(ViewActions.click());
         } catch (Exception NoMatchingViewException) {
 

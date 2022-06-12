@@ -1,5 +1,7 @@
 package com.imposterstech.storyreadingtracker.adapter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +18,19 @@ import com.imposterstech.storyreadingtracker.view.AdminAddStoryActivity;
 import com.imposterstech.storyreadingtracker.view.AdminEditStoryActivity;
 import com.imposterstech.storyreadingtracker.view.AdminFeedbackCheckActivity;
 import com.imposterstech.storyreadingtracker.view.AdminRemoveStoryActivity;
+import com.imposterstech.storyreadingtracker.view.LoginActivity;
 import com.imposterstech.storyreadingtracker.view.PastReadingActivity;
 import com.imposterstech.storyreadingtracker.view.ProfileActivity;
 import com.imposterstech.storyreadingtracker.view.SettingsActivity;
 import com.imposterstech.storyreadingtracker.view.StoryReadingActivity;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOptionAdapter.OptionHolder> {
     ArrayList<String> options;
+    private Context context;
 
     public RVAdminPageOptionAdapter(ArrayList<String> options) {
         this.options = options;
@@ -36,6 +42,7 @@ public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOp
     @Override
     public OptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_admin_main_option_row, parent, false);
+        context = parent.getContext();
         return new OptionHolder(itemView);
     }
 
@@ -65,6 +72,23 @@ public class RVAdminPageOptionAdapter extends RecyclerView.Adapter<RVAdminPageOp
                 if(options.get(position).equals("Update Story")){
                     Intent to_editstory_intent=new Intent(holder.itemView.getContext(), AdminEditStoryActivity.class);
                     holder.itemView.getContext().startActivity(to_editstory_intent);
+
+                }
+                if(options.get(position).equals("Logout")){
+                    try{
+                        FileOutputStream fos = context.openFileOutput("session.txt", Context.MODE_PRIVATE);
+                        OutputStreamWriter writer = new OutputStreamWriter(fos);
+                        writer.write("false");
+                        writer.close();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
+                    Intent to_login_page= new Intent(context.getApplicationContext(), LoginActivity.class);
+                    to_login_page.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(to_login_page);
+                    ((Activity)context).finishAffinity();
+                    ((Activity)context).finish();
 
                 }
 
